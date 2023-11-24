@@ -4,6 +4,12 @@
 
 # Home page
 GET        /                             controllers.Application.index
+GET        /login                        controllers.MsgBoardWeb1_0.login
+GET        /validateLoginGet             controllers.MsgBoardWeb1_0.validateLoginGet(username, password)
+GET        /MsgBoard                     controllers.MsgBoardWeb1_0.taskList
+
++ nocsrf
+POST       /validateLoginPost               controllers.MsgBoardWeb1_0.validateLoginPost
 
 # Prefix must match `play.assets.urlPrefix`
 GET        /assets/*file                 controllers.Assets.at(file)
