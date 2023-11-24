@@ -12,8 +12,12 @@ object MsgBoardModel1 {
     }
 
     def createUser(username:String, password:String) : Boolean = {
-        
-        users += (username -> password)
+        if (users.contains(username)) 
+            false 
+        else {
+            users(username) = password
+            true
+        }
     }
 
     def sendMsg(msg:String) = {
