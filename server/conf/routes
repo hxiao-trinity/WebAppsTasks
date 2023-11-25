@@ -5,7 +5,7 @@
 # Home page
 GET         /                             controllers.Application.index
 GET         /login                        controllers.MsgBoardWeb1_0.login
-GET         /validateLoginGet             controllers.MsgBoardWeb1_0.validateLoginGet(username, password)
+# GET         /validateLoginGet             controllers.MsgBoardWeb1_0.validateLoginGet(username, password)
 GET         /MsgBoard                     controllers.MsgBoardWeb1_0.msgBoard
 
 + nocsrf
