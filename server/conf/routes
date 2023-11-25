@@ -7,8 +7,6 @@ GET         /                             controllers.Application.index
 GET         /login                        controllers.MsgBoardWeb1_0.login
 # GET         /validateLoginGet             controllers.MsgBoardWeb1_0.validateLoginGet(username, password)
 
-
-
 POST        /validateLoginPost            controllers.MsgBoardWeb1_0.validateLoginPost
 POST        /createUser                   controllers.MsgBoardWeb1_0.createUser
 GET         /MsgBoard                     controllers.MsgBoardWeb1_0.msgBoard
