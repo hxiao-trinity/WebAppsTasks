@@ -5,10 +5,13 @@ import scala.collection.mutable
 object MsgBoardModel1 {
 
     // A simple message structure.
-    case class Message(content:String, from:String, to:Option[String] = None)
+    case class Message(from:String, content:String, to:Option[String] = None)
 
     private var users = mutable.Map[String,String]("mlewis" -> "prof", "web" -> "apps")
-    private var msgs = mutable.ListBuffer[Message](Message("Hello, Web!", "mlewis", Some("web")), Message("Hello, people!", "web"))
+    private var messages = mutable.ListBuffer[Message](
+        Message("mlewis", "Hello, Web!", Some("web")), 
+        Message("web", "Hello, people!")
+    )
 
     def validateUser(username:String, password:String) : Boolean = {
         users.get(username).map(_ == password).getOrElse(false)
@@ -23,22 +26,25 @@ object MsgBoardModel1 {
         }
     }
 
-    def sendMsg(username: String, content: String): Unit = {
-        msgs += Message(content, username, Some(username))
+    def postMessage(from: String, content: String, to:Option[String] = None): Unit = {
+        messages += Message(from, content, to)
     }
 
-    def getMessagesFrom(username: String): Seq[Message] = {
-        msgs.filter(_.from.contains(username)).toSeq
+    def getMessagesSentBy(fromUsername: String): Seq[Message] = {
+        messages.filter(_.from.contains(fromUsername)).toSeq
     }
 
-    //Get all PUBLIC messages. If that one is from username, count ONCE.
-    def getPublicMessages(username:String): Seq[Message] = { 
-        var temp = (msgs.filter(_.to.isEmpty)).filterNot((_.from.equals(username))).toSeq
-        temp
+    def getMessagesSentTo(toUsername: String): Seq[Message] = {
+        messages.filter(_.to.contains(toUsername)).toSeq
     }
 
-    def getMessages(username:String) :Seq[Message] = {
-        getMessagesFrom(username) ++ getPublicMessages(username)
+    //Get all PUBLIC messages. If that one is from fromUsername, count ONCE.
+    def getPublicMessages(exceptFromUsername:String): Seq[Message] = { 
+        (messages.filter(_.to.isEmpty)).filterNot((_.from.equals(exceptFromUsername))).toSeq
+    }
+
+    def getMessages(currentUsername:String) :Seq[Message] = {
+        getMessagesSentTo(currentUsername) ++ getMessagesSentBy(currentUsername) ++ getPublicMessages(currentUsername)
     }
 
 }
