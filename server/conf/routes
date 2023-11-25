@@ -8,9 +8,8 @@ GET         /login                        controllers.MsgBoardWeb1_0.login
 # GET         /validateLoginGet             controllers.MsgBoardWeb1_0.validateLoginGet(username, password)
 
 
-# + nocsrf
+
 POST        /validateLoginPost            controllers.MsgBoardWeb1_0.validateLoginPost
-# + nocsrf
 POST        /createUser                   controllers.MsgBoardWeb1_0.createUser
 GET         /MsgBoard                     controllers.MsgBoardWeb1_0.msgBoard
 GET         /logout                       controllers.MsgBoardWeb1_0.logOut

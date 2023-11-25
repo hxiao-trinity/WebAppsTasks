@@ -29,7 +29,7 @@ class MsgBoardWeb1_0 @Inject() (cc: MessagesControllerComponents) extends Messag
             if (models.MsgBoardModel1.validateUser(username,password)) // if credential matches
                 Redirect(routes.MsgBoardWeb1_0.msgBoard).withSession("username" -> username)    //let it in
             else
-                Redirect(routes.MsgBoardWeb1_0.login)   //redirect to login page
+                Redirect(routes.MsgBoardWeb1_0.login).flashing("error" -> "Invalid credential")   //redirect to login page
         }.getOrElse(Ok(""))
     }
 
@@ -45,7 +45,7 @@ class MsgBoardWeb1_0 @Inject() (cc: MessagesControllerComponents) extends Messag
             if (models.MsgBoardModel1.createUser(username,password)) // if credential matches
                 Redirect(routes.MsgBoardWeb1_0.msgBoard).withSession("username" -> username)     //let it in
             else
-                Redirect(routes.MsgBoardWeb1_0.login)   //redirect to login page
+                Redirect(routes.MsgBoardWeb1_0.login).flashing("error" -> "User already exists")   //redirect to login page
         }.getOrElse(Redirect(routes.MsgBoardWeb1_0.login))
     }
 

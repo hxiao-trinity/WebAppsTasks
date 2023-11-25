@@ -1,11 +1,12 @@
 package models
 
+import java.time.LocalDateTime
 import scala.collection.mutable
 
 object MsgBoardModel1 {
 
     // A simple message structure.
-    case class Message(from:String, content:String, to:Option[String] = None)
+    case class Message(from:String, content:String, to:Option[String] = None, sentAt:LocalDateTime = LocalDateTime.now())
 
     private var users = mutable.Map[String,String]("mlewis" -> "prof", "web" -> "apps")
     private var messages = mutable.ListBuffer[Message](
@@ -44,7 +45,7 @@ object MsgBoardModel1 {
     }
 
     def getMessages(currentUsername:String) :Seq[Message] = {
-        getMessagesSentTo(currentUsername) ++ getMessagesSentBy(currentUsername) ++ getPublicMessages(currentUsername)
+        (getMessagesSentTo(currentUsername) ++ getMessagesSentBy(currentUsername) ++ getPublicMessages(currentUsername)).sortBy(_.sentAt)
     }
 
 }

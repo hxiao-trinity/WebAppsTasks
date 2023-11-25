@@ -10,7 +10,7 @@ import shared.SharedMessages
 @Singleton
 class Application @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
 
-  def index = Action {
+  def index = Action { implicit request =>
     Ok(views.html.index(SharedMessages.itWorks))
   }
 
