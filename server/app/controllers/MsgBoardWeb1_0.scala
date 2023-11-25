@@ -62,7 +62,7 @@ class MsgBoardWeb1_0 @Inject() (cc: MessagesControllerComponents) extends Messag
     def msgBoard() = Action { implicit request =>
         val usernameOption = request.session.get("username")
         usernameOption.map{username => 
-            val msgs = models.MsgBoardModel1.getMessages(username) ++ models.MsgBoardModel1.getPublicMessages(username)
+            val msgs = models.MsgBoardModel1.getMessages(username)
             Ok(views.html.MsgBoardWeb1_0(msgs))
         }.getOrElse(Redirect(routes.MsgBoardWeb1_0.login))
         
