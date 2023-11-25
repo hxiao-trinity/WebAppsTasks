@@ -1,5 +1,21 @@
-@(tasks:Seq[String])
+@(messages:Seq[models.MsgBoardModel1.Message])
 
 @main("Task List"){
     <h2>Message App</h2>
+    Hello, Username.
+
+
+    @for(message <- messages) {
+        <div>
+            <strong>@message.to.getOrElse("Public"):</strong> @message.content
+        </div>
+    }
+
+    <!-- Form for posting a new message (if applicable) -->
+    <!-- ... -->
+
+    <form method="post" action="@routes.MsgBoardWeb1_0.postMessage">
+        <textarea name="content"></textarea>
+        <input type="submit" value="Post Message">
+    </form>
 }

@@ -3,14 +3,21 @@
 # ~~~~
 
 # Home page
-GET        /                             controllers.Application.index
-GET        /login                        controllers.MsgBoardWeb1_0.login
-GET        /validateLoginGet             controllers.MsgBoardWeb1_0.validateLoginGet(username, password)
-GET        /MsgBoard                     controllers.MsgBoardWeb1_0.taskList
+GET         /                             controllers.Application.index
+GET         /login                        controllers.MsgBoardWeb1_0.login
+GET         /validateLoginGet             controllers.MsgBoardWeb1_0.validateLoginGet(username, password)
+GET         /MsgBoard                     controllers.MsgBoardWeb1_0.msgBoard
 
 + nocsrf
-POST       /validateLoginPost               controllers.MsgBoardWeb1_0.validateLoginPost
+POST        /validateLoginPost            controllers.MsgBoardWeb1_0.validateLoginPost
++ nocsrf
+POST        /createUser                   controllers.MsgBoardWeb1_0.createUser
+
+# NEW CODE
++ nocsrf
+POST        /postMessage                 controllers.MsgBoardWeb1_0.postMessage
+
 
 # Prefix must match `play.assets.urlPrefix`
-GET        /assets/*file                 controllers.Assets.at(file)
-GET        /versionedAssets/*file        controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file                 controllers.Assets.at(file)
+GET         /versionedAssets/*file        controllers.Assets.versioned(path="/public", file: Asset)
