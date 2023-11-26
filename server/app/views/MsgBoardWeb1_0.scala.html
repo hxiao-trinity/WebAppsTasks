@@ -4,7 +4,7 @@
 @(loggedInWith:String, messages:Seq[models.MsgBoardModel1.Message])(implicit request:RequestHeader, flash:Flash)
 
 
-@main("Task List"){
+@main("Message App"){
     <h2>Message App</h2>
     Welcome, @loggedInWith.
     <br></br>
@@ -23,11 +23,11 @@
 
     <form method="post" action="@routes.MsgBoardWeb1_0.putMessage">
         @helper.CSRF.formField
-        To: <input type="text" name="to"></input>
+        To: <input type="text" name="to" id="message-to"></input>
         <br></br>
-        <textarea name="content"></textarea>
+        <textarea name="content" id="message-content"></textarea>
         <br></br>
-        <input type="submit" value="Put Message">
+        <input type="submit" value="Put Message" id="put-message">
         <br></br>
     </form>
 
