@@ -51,16 +51,16 @@ class MsgBoardWeb1_0 @Inject() (cc: MessagesControllerComponents) extends Messag
 
 
     /////NEW CODES
-    def postMessage = Action { implicit request =>
+    def putMessage = Action { implicit request =>
         val postVals = request.body.asFormUrlEncoded
         postVals.map { args =>
             val username = request.session.get("username").getOrElse("anonymous")
             val content = args("content").head
             val to = args("to").head
             if (!to.isEmpty)
-                models.MsgBoardModel1.postMessage(username, content, Some(to))
+                models.MsgBoardModel1.putMessage(username, content, Some(to))
             else
-                models.MsgBoardModel1.postMessage(username, content)
+                models.MsgBoardModel1.putMessage(username, content)
             Redirect(routes.MsgBoardWeb1_0.msgBoard)
         }.getOrElse(Redirect(routes.MsgBoardWeb1_0.msgBoard))
     }

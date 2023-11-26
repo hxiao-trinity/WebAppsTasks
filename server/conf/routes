@@ -14,7 +14,7 @@ GET         /logout                       controllers.MsgBoardWeb1_0.logOut
 
 # NEW CODE
 + nocsrf
-POST        /postMessage                 controllers.MsgBoardWeb1_0.postMessage
+POST        /putMessage                 controllers.MsgBoardWeb1_0.putMessage
 
 
 # Prefix must match `play.assets.urlPrefix`

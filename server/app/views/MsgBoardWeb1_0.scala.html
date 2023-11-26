@@ -21,16 +21,13 @@
 
     <br></br>
 
-    <!-- Form for posting a new message (if applicable) -->
-    <!-- ... -->
-
-    <form method="post" action="@routes.MsgBoardWeb1_0.postMessage">
+    <form method="post" action="@routes.MsgBoardWeb1_0.putMessage">
         @helper.CSRF.formField
         To: <input type="text" name="to"></input>
         <br></br>
         <textarea name="content"></textarea>
         <br></br>
-        <input type="submit" value="Post Message">
+        <input type="submit" value="Put Message">
         <br></br>
     </form>
 

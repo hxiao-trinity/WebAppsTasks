@@ -27,7 +27,7 @@ object MsgBoardModel1 {
         }
     }
 
-    def postMessage(from: String, content: String, to:Option[String] = None): Unit = {
+    def putMessage(from: String, content: String, to:Option[String] = None): Unit = {
         messages += Message(from, content, to)
     }
 
@@ -45,7 +45,8 @@ object MsgBoardModel1 {
     }
 
     def getMessages(currentUsername:String) :Seq[Message] = {
-        (getMessagesSentTo(currentUsername) ++ getMessagesSentBy(currentUsername) ++ getPublicMessages(currentUsername)).sortBy(_.sentAt)
+        (getMessagesSentTo(currentUsername) ++ getMessagesSentBy(currentUsername) ++ getPublicMessages(currentUsername))
+        .sortBy(_.sentAt)
     }
 
 }
