@@ -12,6 +12,9 @@ class MsgBoardModel1Spec extends PlaySpec{
             validateUser("mlewis", "pppppppppppppppp") mustBe (false)
             validateUser("uuuuuuuuuuuuuuu", "prof") mustBe (false)
         }
+        "cannot create new users with existing usernames" in {
+            createUser("mlewis", "prof") mustBe (false)
+        }
         "get correct at least one default test messages" in {
             val msg = (getMessages("mlewis"))(0)
             (msg.from.contains("mlewis") && msg.content.contains("Hello") && msg.to == Some("web")) mustBe (true)
@@ -22,13 +25,17 @@ class MsgBoardModel1Spec extends PlaySpec{
             msgs.isEmpty mustBe (false)
             msgs.forall(_.to == None) mustBe (true)
         }
-        "cannot create new users with existing usernames" in {
-            createUser("mlewis", "prof") mustBe (false)
-        }
         "add new message for default users" in {
             putMessage("mlewis", "Web, are you OK?", Some("web"))
             getMessages("mlewis").exists(_.content == "Web, are you OK?") mustBe (true)
             getMessages("web").exists(_.content == "Web, are you OK?") mustBe (true)
         }
+        "add new message for new users" in {
+            createUser("user01", "121212") mustBe (true)
+            putMessage("user01", "Dr Lewis, I'm user01", Some("mlewis"))
+            getMessages("mlewis").exists(_.content == "Dr Lewis, I'm user01") mustBe (true)
+            getMessages("user01").exists(_.content == "Dr Lewis, I'm user01") mustBe (true)
+        }
+
     }
 }
