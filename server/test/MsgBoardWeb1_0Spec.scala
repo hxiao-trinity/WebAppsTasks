@@ -9,7 +9,7 @@ class MsgBoardWeb1_0Specs extends PlaySpec with GuiceOneServerPerSuite with OneB
 
         "login and access functions" in {
             
-            go to s"http://localhost:9000/login"
+            go to s"http://localhost:$port/login"
             //eventually{
                 find("h2").foreach(e => e.text mustBe("Login"))
                 click on "username-login"
