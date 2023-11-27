@@ -11,12 +11,11 @@
 
 
     @for(msg <- messages) {
-
-        <div>
+        <li>
             <span>@msg.sentAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))</span>
             <strong>@msg.from TO @msg.to.getOrElse("[PUBLIC]"):</strong> @msg.content
             
-        </div>
+        </li>
     }
 
     <br></br>

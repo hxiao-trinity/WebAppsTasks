@@ -2,19 +2,19 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
+# TASK 5 - 6
 GET         /                             controllers.Application.index
 GET         /login                        controllers.MsgBoardWeb1_0.login
 # GET         /validateLoginGet             controllers.MsgBoardWeb1_0.validateLoginGet(username, password)
-
 POST        /validateLoginPost            controllers.MsgBoardWeb1_0.validateLoginPost
 POST        /createUser                   controllers.MsgBoardWeb1_0.createUser
 GET         /MsgBoard                     controllers.MsgBoardWeb1_0.msgBoard
 GET         /logout                       controllers.MsgBoardWeb1_0.logOut
-
-# NEW CODE
 + nocsrf
 POST        /putMessage                 controllers.MsgBoardWeb1_0.putMessage
+
+# TASK 7
+GET         /WSGame                     controllers.WSGame.index
 
 
 # Prefix must match `play.assets.urlPrefix`
