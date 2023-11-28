@@ -16,6 +16,4 @@ class WSGame @Inject() (cc: ControllerComponents)(implicit system: ActorSystem, 
             Ok(views.html.gamePage())
         }
 
-
-
 }

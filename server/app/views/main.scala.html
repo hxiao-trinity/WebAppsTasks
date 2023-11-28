@@ -10,15 +10,14 @@
 
     <!-- Libraries for React -->
     
-    <!-- 
+
     <script src="https://unpkg.com/react@@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@@16/umd/react-dom.development.js" crossorigin></script> 
-    -->
+
 
     <!-- jQuery -->
-    <!--
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    -->
+    
 
   </head>
   <body>
@@ -26,5 +25,7 @@
     @flash.get("success")
     @content
     @scalajs.html.scripts("play-client", routes.Assets.versioned(_).toString, name => getClass.getResource(s"/public/$name") != null)
+
   </body>
 </html>
+

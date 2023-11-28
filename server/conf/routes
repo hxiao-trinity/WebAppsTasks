@@ -16,6 +16,10 @@ POST        /putMessage                 controllers.MsgBoardWeb1_0.putMessage
 # TASK 7
 GET         /WSGame                     controllers.WSGame.index
 
+# TASK 8
+GET         /load                       controllers.MsgBoardAjax.load
+GET         /login2                     controllers.MsgBoardAjax.login
+GET         /validate                   controllers.MsgBoardAjax.validate(username, password)
 
 # Prefix must match `play.assets.urlPrefix`
 GET         /assets/*file                 controllers.Assets.at(file)

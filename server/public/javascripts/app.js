@@ -13,11 +13,17 @@
 
   
     document.addEventListener('keydown', function(event) {
+        const clamp = (min, x, max) => {
+            return (x < min) ? min : (x > max) ? max : x;
+        };
+        const WIDTH = 800-25;
+        const HEIGHT = 600-25;
         switch(event.key) {
-            case 'ArrowUp': player.y -= 5; break;
-            case 'ArrowDown': player.y += 5; break;
-            case 'ArrowLeft': player.x -= 5; break;
-            case 'ArrowRight': player.x += 5; break;
+            case 'ArrowUp': player.y -= 25; player.y = clamp(0, player.y, HEIGHT); break;
+            case 'ArrowDown': player.y += 25; player.y = clamp(0, player.y, HEIGHT); break;
+            case 'ArrowLeft': player.x -= 25; player.x = clamp(0, player.x, WIDTH); break;
+            case 'ArrowRight': player.x += 25; player.x = clamp(0, player.x, WIDTH); break;
+            
         }
         socket.send(JSON.stringify(player));
         drawPlayer(player);
@@ -34,7 +40,7 @@
     function drawPlayers(players) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         players.forEach(p => {
-            ctx.fillStyle = p.id === player.id ? 'blue' : 'red'; 
+            ctx.fillStyle = (p.id === player.id) ? 'blue' : 'red'; 
             ctx.fillRect(p.x, p.y, 10, 10);
         });
     }

@@ -12,6 +12,7 @@ class Application @Inject()(cc: ControllerComponents) extends AbstractController
 
   def index = Action { implicit request =>
     Ok(views.html.index(SharedMessages.itWorks))
+
   }
 
 }
