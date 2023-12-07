@@ -1,0 +1,1 @@
+CREATE DATABASE msg_board WITH OWNER=hxiao;
