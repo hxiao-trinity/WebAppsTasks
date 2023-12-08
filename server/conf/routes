@@ -22,12 +22,12 @@ GET         /login2                     controllers.MsgBoardAjax.login
 GET         /validate                   controllers.MsgBoardAjax.validate(username, password)
 
 # TASK 9
-GET     /load5                          controllers.MsgBoardDB.load
-POST	/validate5						controllers.MsgBoardDB.validate
-POST	/create5						controllers.MsgBoardDB.createUser
-GET 	/MsgBoard5						controllers.MsgBoardDB.msgBoard
-POST	/putMessage5					controllers.MsgBoardDB.putMessage
-GET     /logout5						controllers.MsgBoardDB.logout
+# GET     /load5                          controllers.MsgBoardDB.load
+# POST	/validate5						controllers.MsgBoardDB.validate
+# POST	/create5						controllers.MsgBoardDB.createUser
+# GET 	/MsgBoard5						controllers.MsgBoardDB.msgBoard
+# POST	/putMessage5					controllers.MsgBoardDB.putMessage
+# GET     /logout5						controllers.MsgBoardDB.logout
 
 # Prefix must match `play.assets.urlPrefix`
 GET         /assets/*file                 controllers.Assets.at(file)
