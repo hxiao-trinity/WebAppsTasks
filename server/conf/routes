@@ -17,20 +17,21 @@ POST        /putMessage                 controllers.MsgBoardWeb1_0.putMessage
 GET         /WSGame                     controllers.WSGame.index
 
 # TASK 8
-GET         /load                       controllers.MsgBoardAjax.load
+GET         /load2                      controllers.MsgBoardAjax.load
 GET         /login2                     controllers.MsgBoardAjax.login
-GET         /validate                   controllers.MsgBoardAjax.validate(username, password)
+GET         /validate2                  controllers.MsgBoardAjax.validate(username, password)
 
-GET         /load3                      controllers.MsgBoardReact.load
-GET         /data                       controllers.MsgBoardReact.data
+# GET         /load3                      controllers.MsgBoardReact.load
+# GET         /data                       controllers.MsgBoardReact.data
+# POST        /validate3                  controllers.MsgBoardReact.validate
 
 # TASK 9
-# GET     /load5                          controllers.MsgBoardDB.load
+# GET   /load5                          controllers.MsgBoardDB.load
 # POST	/validate5						controllers.MsgBoardDB.validate
 # POST	/create5						controllers.MsgBoardDB.createUser
 # GET 	/MsgBoard5						controllers.MsgBoardDB.msgBoard
 # POST	/putMessage5					controllers.MsgBoardDB.putMessage
-# GET     /logout5						controllers.MsgBoardDB.logout
+# GET   /logout5						controllers.MsgBoardDB.logout
 
 # Prefix must match `play.assets.urlPrefix`
 GET         /assets/*file                 controllers.Assets.at(file)

@@ -9,7 +9,7 @@ import javax.inject._
 @Singleton
 class MsgBoardAjax @Inject() (cc: MessagesControllerComponents) extends MessagesAbstractController(cc){
     def load = Action { implicit request =>
-        Ok(views.html.MsgBoardAjax())
+        Ok(views.html.MsgBoardAjaxMain())
     }
 
     def login = Action{
