@@ -14,10 +14,12 @@ function login() {
 }
 
 function createUser() {
-    
     const username = $("#createName").val();
     const password = $("#createPass").val();
     $("#contents").load("/create2?username=" + username + "&password=" + password);
     console.log("Trying to create user with " + username + ", " + password)
+}
+
+function name(params) {
     
 }
