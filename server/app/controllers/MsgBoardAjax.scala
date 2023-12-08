@@ -18,8 +18,15 @@ class MsgBoardAjax @Inject() (cc: MessagesControllerComponents) extends Messages
         Ok(views.html.login2())
     }
 
-    def validate(username:String, password:String) = Action{ implicit request =>
+    def validate(username:String, password:String) = Action { implicit request =>
         if (MsgBoardModel1.validateUser(username, password)) 
+            Ok(views.html.MsgBoardAjax(username, MsgBoardModel1.getMessages(username))).withSession("username" -> username)
+        else
+            Ok(views.html.login2())
+    }
+
+    def createUser(username:String, password:String) = Action { implicit request =>
+        if (MsgBoardModel1.createUser(username, password)) 
             Ok(views.html.MsgBoardAjax(username, MsgBoardModel1.getMessages(username))).withSession("username" -> username)
         else
             Ok(views.html.login2())

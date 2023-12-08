@@ -20,6 +20,7 @@ GET         /WSGame                     controllers.WSGame.index
 GET         /load2                      controllers.MsgBoardAjax.load
 GET         /login2                     controllers.MsgBoardAjax.login
 GET         /validate2                  controllers.MsgBoardAjax.validate(username, password)
+GET         /create2                    controllers.MsgBoardAjax.createUser(username, password)
 
 # GET         /load3                      controllers.MsgBoardReact.load
 # GET         /data                       controllers.MsgBoardReact.data
