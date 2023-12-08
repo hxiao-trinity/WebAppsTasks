@@ -4,6 +4,7 @@ import play.api.data.Forms._
 import play.api.data._
 import play.api.i18n._
 import play.api.mvc._
+import models.MsgBoardModel1
 import javax.inject._
 
 @Singleton
@@ -17,6 +18,9 @@ class MsgBoardAjax @Inject() (cc: MessagesControllerComponents) extends Messages
     }
 
     def validate(username:String, password:String) = Action{
-        Ok("validating")
+        if (MsgBoardModel1.validateUser(username, password)) 
+            Ok(views.html.MsgBoardAjax(username, MsgBoardModel1.getMessages(username))).withSession("username" -> username)
+        else
+            Ok(views.html.login2())
     }
 }
