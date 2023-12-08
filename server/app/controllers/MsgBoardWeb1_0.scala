@@ -50,7 +50,6 @@ class MsgBoardWeb1_0 @Inject() (cc: MessagesControllerComponents) extends Messag
     }
 
 
-    /////NEW CODES
     def putMessage = Action { implicit request =>
         val postVals = request.body.asFormUrlEncoded
         postVals.map { args =>
