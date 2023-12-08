@@ -21,6 +21,9 @@ GET         /load                       controllers.MsgBoardAjax.load
 GET         /login2                     controllers.MsgBoardAjax.login
 GET         /validate                   controllers.MsgBoardAjax.validate(username, password)
 
+GET         /load3                      controllers.MsgBoardReact.load
+GET         /data                       controllers.MsgBoardReact.data
+
 # TASK 9
 # GET     /load5                          controllers.MsgBoardDB.load
 # POST	/validate5						controllers.MsgBoardDB.validate
