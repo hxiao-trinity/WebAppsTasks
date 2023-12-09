@@ -36,7 +36,7 @@ class MsgBoardAjax @Inject() (cc: MessagesControllerComponents) extends Messages
         val usernameOption = request.session.get("username")
         usernameOption.map{ username => 
             MsgBoardModel1.putMessage(username, content, Some(to_username))
-            Ok("")
+            Ok(views.html.MsgBoardAjax(username, MsgBoardModel1.getMessages(username))).withSession("username" -> username)
         }.getOrElse(Ok(views.html.login2()))
     }
 
