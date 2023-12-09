@@ -1,13 +1,18 @@
 
+const csrfToken = $("#csrfToken").val();
 const loginRoute = $("#loginRoute").val();
 const validateRoute = $("#validateRoute").val();
+const createRoute = $("#createRoute").val();
+const deleteRoute = $("#deleteRoute").val();
+const putRoute = $("#putRoute").val();
+
 
 $("#contents").load(loginRoute)
 
 function login() {
     const username = $("#loginName").val();
     const password = $("#loginPass").val();
-    $.post(validateRoute, {username, password}, data => {
+    $.post(validateRoute, {username, password, csrfToken}, data => {
         $("#contents").html(data)
     }); 
 }
@@ -15,12 +20,17 @@ function login() {
 function createUser() {
     const username = $("#createName").val();
     const password = $("#createPass").val();
-    $("#contents").load("/create2?username=" + username + "&password=" + password);
+    $.post(createRoute, {username, password, csrfToken}, data => {
+        $("#contents").html(data)
+    });
 }
 
 function putMessage(){
-    const fromuser = $("#sessionUsername").val();
-    const ctt = $("#message-content").val();
-    const touser = $("#message-to").val();
-    $("#contents").load("/putMessage2?from_username=" + fromuser + "&content=" + encodeURIComponent(ctt) + "&to_username=" + touser)
+    const from_user = $("#sessionUsername").val();
+    const content = $("#message-content").val();
+    const to_user = $("#message-to").val();
+    console.log(putRoute); //putMessage2
+    $.post(putRoute, {from_user, content, to_user, csrfToken}, data => {
+        $("#contents").html(data)
+    });
 }

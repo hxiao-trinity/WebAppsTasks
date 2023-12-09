@@ -17,13 +17,15 @@ POST        /putMessage                 controllers.MsgBoardWeb1_0.putMessage
 GET         /WSGame                     controllers.WSGame.index
 
 # TASK 8
+
 GET         /load2                      controllers.MsgBoardAjax.load
 GET         /login2                     controllers.MsgBoardAjax.login
 POST        /validate2                  controllers.MsgBoardAjax.validate
-GET         /create2                    controllers.MsgBoardAjax.createUser(username, password)
-GET         /putMessage2                controllers.MsgBoardAjax.putMessage(from_username, content, to_username)
+POST        /create2                    controllers.MsgBoardAjax.createUser
+POST        /putMessage2                controllers.MsgBoardAjax.putMessage
 GET         /logout2                    controllers.MsgBoardAjax.logOut
 GET         /generatedJS                controllers.MsgBoardAjax.generatedJS
+GET         /MsgBoard2                  controllers.MsgBoardAjax.msgBoard
 
 # GET         /load3                      controllers.MsgBoardReact.load
 # GET         /data                       controllers.MsgBoardReact.data
