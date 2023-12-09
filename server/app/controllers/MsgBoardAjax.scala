@@ -11,18 +11,28 @@ import javax.inject._
 @Singleton
 class MsgBoardAjax @Inject() (cc: MessagesControllerComponents) extends MessagesAbstractController(cc){
     def load = Action { implicit request =>
-        Ok(views.html.MsgBoardAjaxMain())
+        val usernameOption = request.session.get("username")
+        usernameOption.map{ username => 
+            Ok(views.html.MsgBoardAjax(username, MsgBoardModel1.getMessages(username)))
+        }.getOrElse(Ok(views.html.MsgBoardAjaxMain()))
     }
 
     def login() = Action{ implicit request =>
         Ok(views.html.login2())
     }
 
-    def validate(username:String, password:String) = Action { implicit request =>
-        if (MsgBoardModel1.validateUser(username, password)) 
-            Ok(views.html.MsgBoardAjax(username, MsgBoardModel1.getMessages(username))).withSession("username" -> username)
-        else
-            Ok(views.html.login2())
+    def validate = Action { implicit request =>
+        val postVals = request.body.asFormUrlEncoded
+        postVals.map { args =>
+            val username = args("username").head
+            val password = args("password").head
+            if (MsgBoardModel1.validateUser(username, password)) 
+                Ok(views.html.MsgBoardAjax(username, MsgBoardModel1.getMessages(username)))
+                    .withSession("username" -> username)
+            else
+                Ok(views.html.login2())
+        }.getOrElse(Ok(views.html.login2()))
+        
     }
 
     def createUser(username:String, password:String) = Action { implicit request =>
@@ -41,6 +51,10 @@ class MsgBoardAjax @Inject() (cc: MessagesControllerComponents) extends Messages
     }
 
     def logOut() = Action {
-        Redirect(routes.MsgBoardAjax.login).withNewSession
+        Redirect(routes.MsgBoardAjax.load).withNewSession
+    }
+
+    def generatedJS = Action {
+        Ok(views.js.generatedJS())
     }
 }

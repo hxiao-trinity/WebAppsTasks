@@ -1,12 +1,15 @@
 
+const loginRoute = $("#loginRoute").val();
+const validateRoute = $("#validateRoute").val();
 
-$("#contents").load("/login2")
-console.log("MsgBoardAjax.js loaded");
+$("#contents").load(loginRoute)
 
 function login() {
     const username = $("#loginName").val();
     const password = $("#loginPass").val();
-    $("#contents").load("/validate2?username=" + username + "&password=" + password); 
+    $.post(validateRoute, {username, password}, data => {
+        $("#contents").html(data)
+    }); 
 }
 
 function createUser() {
@@ -19,5 +22,5 @@ function putMessage(){
     const fromuser = $("#sessionUsername").val();
     const ctt = $("#message-content").val();
     const touser = $("#message-to").val();
-    $("#contents").load("/putMessage2?from_username=" + fromuser + "&content=" + ctt + "&to_username=" + touser)
+    $("#contents").load("/putMessage2?from_username=" + fromuser + "&content=" + encodeURIComponent(ctt) + "&to_username=" + touser)
 }
