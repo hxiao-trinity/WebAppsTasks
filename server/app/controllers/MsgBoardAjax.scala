@@ -70,7 +70,8 @@ class MsgBoardAjax @Inject() (cc: MessagesControllerComponents) extends Messages
                 else{
                     models.MsgBoardModel1.putMessage(username, content)
                 }
-                Ok(views.html.MsgBoardAjax(username, MsgBoardModel1.getMessages(username))).withSession("username" -> username)
+                Ok(views.html.MsgBoardAjax(username, MsgBoardModel1.getMessages(username)))
+                .withSession("username" -> username, "csrfToken" -> play.filters.csrf.CSRF.getToken.get.value)
             }.getOrElse(Ok(views.html.login2()))
         }.getOrElse(Ok(views.html.login2()))
         

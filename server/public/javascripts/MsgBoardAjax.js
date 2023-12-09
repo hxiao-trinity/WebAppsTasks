@@ -9,6 +9,7 @@ const putRoute = $("#putRoute").val();
 
 $("#contents").load(loginRoute)
 
+
 function login() {
     const username = $("#loginName").val();
     const password = $("#loginPass").val();
@@ -29,8 +30,8 @@ function putMessage(){
     const from_user = $("#sessionUsername").val();
     const content = $("#message-content").val();
     const to_user = $("#message-to").val();
-    console.log(putRoute); //putMessage2
     $.post(putRoute, {from_user, content, to_user, csrfToken}, data => {
         $("#contents").html(data)
     });
+    
 }
