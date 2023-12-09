@@ -21,6 +21,8 @@ GET         /load2                      controllers.MsgBoardAjax.load
 GET         /login2                     controllers.MsgBoardAjax.login
 GET         /validate2                  controllers.MsgBoardAjax.validate(username, password)
 GET         /create2                    controllers.MsgBoardAjax.createUser(username, password)
+GET         /putMessage2                controllers.MsgBoardAjax.putMessage(from_username, content, to_username)
+GET         /logout2                    controllers.MsgBoardAjax.logOut
 
 # GET         /load3                      controllers.MsgBoardReact.load
 # GET         /data                       controllers.MsgBoardReact.data

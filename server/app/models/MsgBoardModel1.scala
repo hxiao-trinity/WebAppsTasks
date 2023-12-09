@@ -45,7 +45,12 @@ object MsgBoardModel1 {
     }
 
     def getMessages(currentUsername:String) :Seq[Message] = {
-        (getMessagesSentTo(currentUsername) ++ getMessagesSentBy(currentUsername) ++ getPublicMessages(currentUsername))
+        //(getMessagesSentTo(currentUsername) ++ getMessagesSentBy(currentUsername) ++ getPublicMessages(currentUsername))
+        (
+        messages.filter(_.from.contains(currentUsername)).toSeq ++
+        messages.filter(_.to.contains(currentUsername)).toSeq ++
+        (messages.filter(_.to.isEmpty)).filterNot((_.from.equals(currentUsername))).toSeq
+        )
         .sortBy(_.sentAt)
     }
 

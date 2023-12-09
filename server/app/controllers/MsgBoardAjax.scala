@@ -31,4 +31,16 @@ class MsgBoardAjax @Inject() (cc: MessagesControllerComponents) extends Messages
         else
             Ok(views.html.login2())
     }
+
+    def putMessage(from_username:String, content:String, to_username:String) = Action { implicit request =>
+        val usernameOption = request.session.get("username")
+        usernameOption.map{ username => 
+            MsgBoardModel1.putMessage(username, content, Some(to_username))
+            Ok("")
+        }.getOrElse(Ok(views.html.login2()))
+    }
+
+    def logOut() = Action {
+        Redirect(routes.MsgBoardAjax.login).withNewSession
+    }
 }

@@ -9,6 +9,8 @@
     Welcome, @loggedInWith.
     <br></br>
 
+    <input type="hidden" id="sessionUsername" value="@loggedInWith">
+
 
     @for(msg <- messages) {
         <li>
@@ -19,17 +21,17 @@
     }
 
     <br></br>
-<!--
-    <form method="post" action="@routes.MsgBoardWeb1_0.putMessage">
-        To: <input type="text" name="to" id="message-to"></input>
-        <br></br>
-        <textarea name="content" id="message-content"></textarea>
-        <br></br>
-        <input type="submit" value="Put Message" id="put-message">
-        <br></br>
-    </form>
--->
+
+    
+    To: <input type="text" id="message-to"></input>
+    <br></br>
+    <textarea id="message-content"></textarea>
+    <br></br>
+    <button onclick="putMessage()"></button>
+    <br></br>
+   
+
 
     <div>
-        <a href="@routes.MsgBoardWeb1_0.logOut">Logout</a>
+        <a href="@routes.MsgBoardAjax.logOut">Logout</a>
     </div>
