@@ -51,11 +51,11 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
             request.body.asJson.map{ body =>
                 Json.fromJson[Message](body) match {
                     case JsSuccess(message, path) => 
-                        if (!message.to.isEmpty){
-                            models.MsgBoardModel1.putMessage(username, message.content, message.to)
-                        }
-                        else{
-                            models.MsgBoardModel1.putMessage(username, message.content)
+                        message.to match {
+                            case Some(toValue) => 
+                                models.MsgBoardModel1.putMessage(username, message.content, Some(toValue))
+                            case None => 
+                                models.MsgBoardModel1.putMessage(username, message.content)
                         }
                         Ok(Json.toJson(true))
                         //Ok(views.html.MsgBoardAjax(username, MsgBoardModel1.getMessages(username)))
