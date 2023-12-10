@@ -29,9 +29,8 @@ GET         /MsgBoard2                  controllers.MsgBoardAjax.msgBoard
 
 GET         /load3                      controllers.MsgBoard3.load
 POST        /validate3                  controllers.MsgBoard3.validate
-GET         /data                       controllers.MsgBoard3.data
 GET         /MsgBoard3                  controllers.MsgBoard3.msgBoard
-
+POST        /putMessage3                controllers.MsgBoard3.putMessage
 
 # TASK 9
 # GET   /load5                          controllers.MsgBoardDB.load

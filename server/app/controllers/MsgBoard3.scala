@@ -1,6 +1,6 @@
 package controllers
 
-import models.MsgBoardModel1
+import models.MsgBoardModel1._
 import models._
 import play.api.data.Forms._
 import play.api.data._
@@ -34,13 +34,6 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
         }.getOrElse(Redirect(routes.MsgBoard3.load))
     } 
 
-    
-
-    def data = Action {
-        Ok(Json.toJson(Seq("a", "b", "c")))
-    }
-
-    
     def load = Action {implicit request =>
         Ok(views.html.MsgBoard3Main())
     }
@@ -51,6 +44,27 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
             Ok(Json.toJson(MsgBoardModel1.getMessages(username)))
         }.getOrElse(Ok(Json.toJson(Seq.empty[String])))
     } 
+
+    def putMessage = Action { implicit request =>
+        val usernameOption = request.session.get("username")
+        usernameOption.map{ username =>
+            request.body.asJson.map{ body =>
+                Json.fromJson[Message](body) match {
+                    case JsSuccess(message, path) => 
+                        if (!message.to.isEmpty){
+                            models.MsgBoardModel1.putMessage(username, message.content, message.to)
+                        }
+                        else{
+                            models.MsgBoardModel1.putMessage(username, message.content)
+                        }
+                        Ok(Json.toJson(true))
+                        //Ok(views.html.MsgBoardAjax(username, MsgBoardModel1.getMessages(username)))
+
+                    case e @ JsError(_) => Redirect(routes.MsgBoard3.load)
+                }
+            }.getOrElse(Ok(Json.toJson(false)))      
+        }.getOrElse(Ok(Json.toJson(false)))
+    }
 
 
 }
