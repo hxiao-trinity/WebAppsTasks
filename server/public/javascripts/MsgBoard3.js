@@ -49,3 +49,22 @@ function loadMessages() {
     });
     
 }
+
+function putMessage() {
+    let username = document.getElementById("message-to").value;
+    let content = document.getElementById("message-content").value;
+    let to = document.getElementById("message-to").value;
+    fetch(putRoute, { 
+		method: 'POST',
+		headers: {'Content-Type': 'application/json', 'Csrf-Token':csrfToken},
+		body: JSON.stringify({ username, content, to })
+	}).then(res => res.json()).then(data => {
+        console.log(data);
+        if (data){
+            loadMessages();
+        }
+        else{
+
+        }
+    });
+}
