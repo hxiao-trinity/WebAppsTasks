@@ -1,6 +1,9 @@
 package models
 
+import play.api.libs.json._
+
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import scala.collection.mutable
 
 object MsgBoardModel1 {
@@ -53,5 +56,37 @@ object MsgBoardModel1 {
         )
         .sortBy(_.sentAt)
     }
+
+
+
+    object Message {
+        // Define a formatter for LocalDateTime
+        val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
+
+        // Implicit Reads for LocalDateTime
+        implicit val localDateTimeReads: Reads[LocalDateTime] = new Reads[LocalDateTime] {
+            def reads(json: JsValue): JsResult[LocalDateTime] = json match {
+            case JsString(value) =>
+                try {
+                JsSuccess(LocalDateTime.parse(value, dateTimeFormatter))
+                } catch {
+                case e: Exception => JsError("error.expected.date.isoformat")
+                }
+            case _ => JsError("error.expected.jsstring")
+            }
+        }
+
+        // Implicit Reads for the Message case class
+        implicit val messageReads: Reads[Message] = Json.reads[Message]
+
+        // Implicit Writes for the Message case class
+        implicit val messageWrites: Writes[Message] = Json.writes[Message]
+
+        // Implicit Writes for Seq[Message]
+        // Note: This is typically automatically available if messageWrites is in scope.
+        // implicit val seqMessageWrites: Writes[Seq[Message]] = Writes.seq[Message]
+    }
+
+
 
 }

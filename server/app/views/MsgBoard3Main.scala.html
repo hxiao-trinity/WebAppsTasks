@@ -26,7 +26,7 @@
 	</div>
 
 	<div id="message-section" hidden>
-		<h2>Message App V2.0</h2>
+		<h2>Message App V2.1</h2>
 		@*Welcome, @loggedInWith.*@
 		<br></br>
 		@*<input type="hidden" id="sessionUsername" value="@loggedInWith">*@
@@ -59,6 +59,7 @@
 	<input type="hidden" id="createRoute" value="@routes.MsgBoardAjax.createUser">
 	<input type="hidden" id="putRoute" value="@routes.MsgBoardAjax.putMessage">
 
-    <script src="@routes.Assets.versioned("javascripts/MsgBoard3.js")"></script>
+    
 	@*<script src="@routes.MsgBoardAjax.generatedJS"></script>*@
+	<script src="@routes.Assets.versioned("javascripts/MsgBoard3.js")"></script>
 }

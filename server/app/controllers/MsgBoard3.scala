@@ -22,16 +22,17 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
         request.body.asJson.map{ body =>
             Json.fromJson[UserData](body) match {
                 case JsSuccess(ud, path) => 
-                    if (MsgBoardModel1.validateUser(ud.username, ud.password)) 
+                    if (MsgBoardModel1.validateUser(ud.username, ud.password)) {
                         Ok(Json.toJson(true))
                             .withSession("username" -> ud.username, "csrfToken" -> play.filters.csrf.CSRF.getToken.get.value)
-                    else
+                    }
+                    else{
                         Ok(Json.toJson(false))
+                    }
                 case e @ JsError(_) => Redirect(routes.MsgBoard3.load)
             }
-            Ok("")
         }.getOrElse(Redirect(routes.MsgBoard3.load))
-    }
+    } 
 
     
 
@@ -44,12 +45,12 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
         Ok(views.html.MsgBoard3Main())
     }
 
-    def msgBoard = TODO /* Action { implicit request =>
+    def msgBoard = Action { implicit request =>
         val usernameOption = request.session.get("username")
         usernameOption.map{ username => 
             Ok(Json.toJson(MsgBoardModel1.getMessages(username)))
         }.getOrElse(Ok(Json.toJson(Seq.empty[String])))
-    } */
+    } 
 
 
 }
