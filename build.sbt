@@ -22,6 +22,7 @@ lazy val server = (project in file("server")).settings(commonSettings).settings(
 		"com.typesafe.play" %% "play-slick" % "5.1.0",
 		"com.typesafe.slick" %% "slick-codegen" % "3.4.1",
     "org.postgresql" % "postgresql" % "42.6.0",
+    //"com.typesafe.play" %%% "play-json-joda" % "2.9.4", //Horton added this line
     "com.typesafe.slick" %% "slick-hikaricp" % "3.4.1",
     "org.mindrot" % "jbcrypt" % "0.4",
     specs2 % Test
@@ -58,7 +59,11 @@ lazy val sharedJs = shared.js
 lazy val commonSettings = Seq(
   scalaVersion := "2.13.11",
   organization := "edu.trinity",
+  //Lewis gave us:
   libraryDependencies += "com.typesafe.play" %%% "play-json" % "2.9.4"
+  //Horton added:
+  //libraryDependencies += "com.typesafe.play" %%% "play-json" % "2.9.4"
+  
 )
 
 // loads the server project at sbt startup

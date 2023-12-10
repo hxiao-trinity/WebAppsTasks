@@ -1,0 +1,64 @@
+@**@
+
+@()(implicit request:RequestHeader, flash:Flash)
+
+@main("Message App V2.1"){
+    <div id="contents">Version 2.1</div>
+
+
+	<div id="login-section">
+		Username: <input type="text" id="loginName"></input>
+		<br>
+		Password: <input type="password" id="loginPass"></input>
+		<br>
+
+		<button onclick="login()">Login</button>
+
+		<br>
+
+
+		Username: <input type="text" id="createName"></input>
+		<br>
+		Password: <input type="password" id="createPass"></input>
+		<br>
+
+		<button onclick="createUser()">Create User</button>
+	</div>
+
+	<div id="message-section" hidden>
+		<h2>Message App V2.0</h2>
+		@*Welcome, @loggedInWith.*@
+		<br></br>
+		@*<input type="hidden" id="sessionUsername" value="@loggedInWith">*@
+
+
+		<ul id="message-list">
+
+
+		</ul>
+
+		<br></br>
+		
+		To: <input type="text" id="message-to"></input>
+		<br></br>
+		<textarea id="message-content"></textarea>
+		<br></br>
+		<button onclick="putMessage()">Put Message</button>
+		<br></br>
+
+	</div>
+
+	<div>
+		<a href="@routes.MsgBoardAjax.logOut">Logout</a>
+	</div>
+
+    <input type="hidden" id="csrfToken" value="@helper.CSRF.getToken.value">
+	@*<input type="hidden" id="loginRoute" value="@startRoute">*@
+	<input type="hidden" id="validateRoute" value="@routes.MsgBoard3.validate">
+	<input type="hidden" id="messagesRoute" value="@routes.MsgBoard3.msgBoard">
+	<input type="hidden" id="createRoute" value="@routes.MsgBoardAjax.createUser">
+	<input type="hidden" id="putRoute" value="@routes.MsgBoardAjax.putMessage">
+
+    <script src="@routes.Assets.versioned("javascripts/MsgBoard3.js")"></script>
+	@*<script src="@routes.MsgBoardAjax.generatedJS"></script>*@
+}
