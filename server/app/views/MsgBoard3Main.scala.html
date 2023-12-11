@@ -1,6 +1,6 @@
 @**@
 
-@()(implicit request:RequestHeader, flash:Flash)
+@(loggedInWith:String)(implicit request:RequestHeader, flash:Flash)
 
 @main("Message App V2.1"){
     <div id="contents">Version 2.1</div>
@@ -27,9 +27,9 @@
 
 	<div id="message-section" hidden>
 		<h2>Message App V2.1</h2>
-		@*Welcome, @loggedInWith.*@
+		Welcome, @loggedInWith.
 		<br></br>
-		@*<input type="hidden" id="sessionUsername" value="@loggedInWith">*@
+		<input type="hidden" id="sessionUsername" value="@loggedInWith">
 
 
 		<ul id="message-list">
@@ -53,7 +53,6 @@
 	</div>
 
     <input type="hidden" id="csrfToken" value="@helper.CSRF.getToken.value">
-	@*<input type="hidden" id="loginRoute" value="@startRoute">*@
 	<input type="hidden" id="validateRoute" value="@routes.MsgBoard3.validate">
 	<input type="hidden" id="messagesRoute" value="@routes.MsgBoard3.msgBoard">
 	<input type="hidden" id="createRoute" value="@routes.MsgBoardAjax.createUser">

@@ -35,7 +35,7 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
     } 
 
     def load = Action {implicit request =>
-        Ok(views.html.MsgBoard3Main())
+        Ok(views.html.MsgBoard3Main(request.session.get("username").getOrElse("WHO ARE YOU?!")))
     }
 
     def msgBoard = Action { implicit request =>
