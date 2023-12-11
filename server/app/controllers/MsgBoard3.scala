@@ -29,7 +29,7 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
                     else{
                         Ok(Json.toJson(false))
                     }
-                case e @ JsError(_) => Redirect(routes.MsgBoard3.load)
+                case e @ JsError(_) => BadRequest("V In validate(), Json.fromJson[UserData](body) match JsError") //Redirect(routes.MsgBoard3.load)
             }
         }.getOrElse(Redirect(routes.MsgBoard3.load))
     } 
@@ -49,6 +49,7 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
         val usernameOption = request.session.get("username")
         usernameOption.map{ username =>
             request.body.asJson.map{ body =>
+                println("What's going to be matched? " + Json.fromJson[Message](body))
                 Json.fromJson[Message](body) match {
                     case JsSuccess(message, path) => 
                         message.to match {
@@ -60,7 +61,7 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
                         Ok(Json.toJson(true))
                         //Ok(views.html.MsgBoardAjax(username, MsgBoardModel1.getMessages(username)))
 
-                    case e @ JsError(_) => Redirect(routes.MsgBoard3.load)
+                    case e @ JsError(_) => BadRequest("P In putMessage(), Json.fromJson[Message](body) match JsError") //Redirect(routes.MsgBoard3.load)
                 }
             }.getOrElse(Ok(Json.toJson(false)))      
         }.getOrElse(Ok(Json.toJson(false)))

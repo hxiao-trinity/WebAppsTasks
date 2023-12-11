@@ -1,7 +1,7 @@
 package models
 
 import play.api.libs.json._
-
+import play.api.libs.functional.syntax._
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import scala.collection.mutable
@@ -77,7 +77,12 @@ object MsgBoardModel1 {
         }
 
         // Implicit Reads for the Message case class
-        implicit val messageReads: Reads[Message] = Json.reads[Message]
+        implicit val messageReads: Reads[Message] = (
+            (__ \ "from").read[String] and
+            (__ \ "content").read[String] and
+            (__ \ "to").readNullable[String] and
+            Reads.pure(LocalDateTime.now)
+        )(Message.apply _)
 
         // Implicit Writes for the Message case class
         implicit val messageWrites: Writes[Message] = Json.writes[Message]
