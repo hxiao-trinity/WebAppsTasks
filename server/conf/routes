@@ -31,6 +31,8 @@ GET         /load3                      controllers.MsgBoard3.load
 POST        /validate3                  controllers.MsgBoard3.validate
 GET         /MsgBoard3                  controllers.MsgBoard3.msgBoard
 POST        /putMessage3                controllers.MsgBoard3.putMessage
+POST        /create3                    controllers.MsgBoard3.createUser
+GET         /logout3                    controllers.MsgBoard3.logOut
 
 # TASK 9
 # GET   /load5                          controllers.MsgBoardDB.load

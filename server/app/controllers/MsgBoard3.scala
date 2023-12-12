@@ -67,5 +67,26 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
         }.getOrElse(Ok(Json.toJson(false)))
     }
 
+    def createUser = Action { implicit request =>
+        request.body.asJson.map{ body =>
+            Json.fromJson[UserData](body) match {
+                case JsSuccess(ud, path) => 
+                    if (MsgBoardModel1.createUser(ud.username, ud.password)) {
+                        Ok(Json.toJson(true))
+                            .withSession("username" -> ud.username, "csrfToken" -> play.filters.csrf.CSRF.getToken.get.value)
+                    }
+                    else{
+                        Ok(Json.toJson(false))
+                    }
+                case e @ JsError(_) => Redirect(routes.MsgBoard3.load)
+            }
+        }.getOrElse(Redirect(routes.MsgBoard3.load))
+    } 
+
+
+    def logOut = Action {implicit request =>
+        Ok(Json.toJson(true)).withSession()    
+    }
+
 
 }

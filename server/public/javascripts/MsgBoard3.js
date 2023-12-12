@@ -5,6 +5,7 @@ const validateRoute = document.getElementById("validateRoute").value;
 const messagesRoute = document.getElementById("messagesRoute").value;
 const createRoute = document.getElementById("createRoute").value;
 const putRoute = document.getElementById("putRoute").value;
+const logOutRoute = document.getElementById("logOutRoute").value;
 
 function login() {
 
@@ -29,21 +30,22 @@ function login() {
 
 function loadMessages() {
     
-    const ul = document.getElementById("message-list")
+    const ul = document.getElementById("message-list");
+    ul.innerHTML = "";
     fetch(messagesRoute).then(res => res.json()).then(messages => {
         for (const message of messages){
             const li = document.createElement("li");
-            const fromUserText = document.createTextNode(message.from);
-            const contentText = document.createTextNode(message.content);
-            const toUserText = document.createTextNode(message.to);
-            const sentAtText = document.createTextNode(message.sentAt);
-
-            li.appendChild(sentAtText);
-            li.appendChild(fromUserText);
+            
+            li.appendChild(document.createTextNode(message.sentAt));
+            li.appendChild(document.createTextNode(" "))
+            li.appendChild(document.createTextNode(message.from));
             li.appendChild(document.createTextNode(" TO "));
-            li.appendChild(toUserText);
-            li.appendChild(document.createTextNode(": "))
-            li.appendChild(contentText);
+            li.appendChild(document.createTextNode(message.to));
+            li.appendChild(document.createTextNode(": "));
+            li.appendChild(document.createTextNode(message.content));
+            li.onclick = e => {
+
+            }
             ul.appendChild(li);
         }
     });
@@ -62,9 +64,39 @@ function putMessage() {
         console.log(data);
         if (data){
             loadMessages();
+            document.getElementById("message-to").value = "";
+            document.getElementById("message-content").value = "";
         }
         else{
 
         }
+    });
+}
+
+function createUser() {
+
+    const username = document.getElementById("createName").value;
+    const password = document.getElementById("createPass").value;
+    fetch(createRoute, { 
+		method: 'POST',
+		headers: {'Content-Type': 'application/json', 'Csrf-Token':csrfToken},
+		body: JSON.stringify({ username, password })
+	}).then(res => res.json()).then(data => {
+        console.log(data);
+        if (data){
+            document.getElementById("login-section").hidden = true;
+            document.getElementById("message-section").hidden = false;
+            loadMessages();
+        }
+        else{
+
+        }
+    });
+}
+
+function logOut() {
+    fetch(logOutRoute).then(res => res.json()).then(messages =>{
+        document.getElementById("login-section").hidden = false;
+        document.getElementById("message-section").hidden = true;
     });
 }
