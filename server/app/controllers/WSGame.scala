@@ -23,7 +23,6 @@ class GameActor extends Actor {
     case PlayerMoved(id, x, y) =>
       gameState = GameState(gameState.players + (id -> Player(id, x, y)))
       context.system.eventStream.publish(gameState)
-    // handle other messages such as player joins, disconnects, etc.
   }
 }
 
@@ -47,7 +46,6 @@ class WSGame @Inject()(cc: ControllerComponents)(implicit system: ActorSystem, m
 
         def receive = {
           case msg: String =>
-            // Deserialize and handle incoming message
             val playerMoved = Json.parse(msg).as[PlayerMoved]
             gameActor ! playerMoved
 
@@ -57,5 +55,4 @@ class WSGame @Inject()(cc: ControllerComponents)(implicit system: ActorSystem, m
       })
     }
   }
-  // other methods
 }

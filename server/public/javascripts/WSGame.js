@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const socket = new WebSocket(`ws://${window.location.host}/gameSocket`);
 
     let playerId = 'player_' + Math.random().toString(36).substr(2, 9);
-    let playerX = 400; 
-    let playerY = 300; 
+    let playerX = canvas.width/2; 
+    let playerY = canvas.height/2; 
 
 
     socket.onmessage = function(event) {
@@ -15,17 +15,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function renderGame(gameState) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+        ctx.rect(0, 0, canvas.width, canvas.height);
+        ctx.stroke();
         for (const [id, player] of Object.entries(gameState.players)) {
-            ctx.fillRect(player.x, player.y, 10, 10); // Draw player as 10x10 square
+            ctx.fillRect(player.x, player.y, 10, 10);
         }
     }
 
     document.addEventListener('keydown', function(event) {
         switch (event.key) {
-            case "ArrowUp": playerY -= 5; break;
-            case "ArrowDown": playerY += 5; break;
-            case "ArrowLeft": playerX -= 5; break;
-            case "ArrowRight": playerX += 5; break;
+            case "ArrowUp": playerY = Math.max(playerY-5, 0); break;
+            case "ArrowDown": playerY = Math.min(playerY+5, canvas.height-10); break;
+            case "ArrowLeft": playerX = Math.max(playerX-5, 0); break;
+            case "ArrowRight": playerX = Math.min(playerX+5, canvas.width-10); break;
         }
 
         // Send the updated position to the server
