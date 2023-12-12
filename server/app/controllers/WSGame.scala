@@ -13,7 +13,7 @@ import javax.inject._
 
 class WSGame @Inject() (cc: ControllerComponents)(implicit system: ActorSystem, mat: Materializer) extends AbstractController(cc) {
         def index = Action{ implicit request =>
-            Ok(views.html.gamePage())
+            Ok(views.html.WSGamePage())
         }
 
 }
