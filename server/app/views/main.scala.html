@@ -8,6 +8,7 @@
     <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
     <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
 
+@*
     <!-- Libraries for React -->
     
 
@@ -17,7 +18,7 @@
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    
+  
 
   </head>
   <body>
@@ -27,5 +28,8 @@
     @scalajs.html.scripts("play-client", routes.Assets.versioned(_).toString, name => getClass.getResource(s"/public/$name") != null)
 
   </body>
+
+  *@
+
 </html>
 
