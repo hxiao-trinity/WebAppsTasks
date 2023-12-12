@@ -1,52 +1,49 @@
-
+document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('game-canvas');
     const ctx = canvas.getContext('2d');
-    //const socket = new WebSocket('ws://localhost:9000/WSGame');
-    
-    const socketRoute = document.getElementById("ws-route").value;
-    const socket = new WebSocket(socketRoute.replace("http", "ws"));
+    const socket = new WebSocket(`ws://${window.location.host}/gameSocket`);
 
-    let player = { x: 50, y: 50, id: 1 }; 
+    let playerId = 'player_' + Math.random().toString(36).substr(2, 9);
+    let playerX = 400; 
+    let playerY = 300; 
 
-  
+
     socket.onmessage = function(event) {
-        const players = JSON.parse(event.data);
-        drawPlayers(players);
+        const gameState = JSON.parse(event.data);
+        renderGame(gameState);
     };
 
-  
-    document.addEventListener('keydown', function(event) {
-        const clamp = (min, x, max) => {
-            return (x < min) ? min : (x > max) ? max : x;
-        };
-        const WIDTH = 800-25;
-        const HEIGHT = 600-25;
-        switch(event.key) {
-            case 'ArrowUp': player.y -= 25; player.y = clamp(0, player.y, HEIGHT); break;
-            case 'ArrowDown': player.y += 25; player.y = clamp(0, player.y, HEIGHT); break;
-            case 'ArrowLeft': player.x -= 25; player.x = clamp(0, player.x, WIDTH); break;
-            case 'ArrowRight': player.x += 25; player.x = clamp(0, player.x, WIDTH); break;
-            
-        }
-        socket.send(JSON.stringify(player));
-        drawPlayer(player);
-    });
-
-    // Draw Player Function
-    function drawPlayer(player) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height); 
-        ctx.fillStyle = 'blue'; 
-        ctx.fillRect(player.x, player.y, 10, 10); 
-    }
-
-    // Draw All Players
-    function drawPlayers(players) {
+    function renderGame(gameState) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        players.forEach(p => {
-            ctx.fillStyle = (p.id === player.id) ? 'blue' : 'red'; 
-            ctx.fillRect(p.x, p.y, 10, 10);
-        });
+        for (const [id, player] of Object.entries(gameState.players)) {
+            ctx.fillRect(player.x, player.y, 10, 10); // Draw player as 10x10 square
+        }
     }
 
-    // Initial Draw
-    drawPlayer(player);
+    document.addEventListener('keydown', function(event) {
+        switch (event.key) {
+            case "ArrowUp": playerY -= 5; break;
+            case "ArrowDown": playerY += 5; break;
+            case "ArrowLeft": playerX -= 5; break;
+            case "ArrowRight": playerX += 5; break;
+        }
+
+        // Send the updated position to the server
+        socket.send(JSON.stringify({ id: playerId, x: playerX, y: playerY }));
+    });
+/*
+    document.addEventListener('keydown', function(event) {
+        let dx = 0, dy = 0;
+        if (event.key === "ArrowUp") dy = -5;
+        else if (event.key === "ArrowDown") dy = 5;
+        else if (event.key === "ArrowLeft") dx = -5;
+        else if (event.key === "ArrowRight") dx = 5;
+
+        if (dx !== 0 || dy !== 0) {
+            socket.send(JSON.stringify({ id: playerId, x: dx, y: dy }));
+        }
+    });
+*/
+
+
+});
