@@ -1,7 +1,10 @@
 
-    const canvas = document.getElementById('gameCanvas');
+    const canvas = document.getElementById('game-canvas');
     const ctx = canvas.getContext('2d');
-    const socket = new WebSocket('ws://localhost:9000/WSGame');
+    //const socket = new WebSocket('ws://localhost:9000/WSGame');
+    
+    const socketRoute = document.getElementById("ws-route").value;
+    const socket = new WebSocket(socketRoute.replace("http", "ws"));
 
     let player = { x: 50, y: 50, id: 1 }; 
 

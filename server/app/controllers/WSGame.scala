@@ -15,5 +15,9 @@ class WSGame @Inject() (cc: ControllerComponents)(implicit system: ActorSystem, 
         def index = Action{ implicit request =>
             Ok(views.html.WSGamePage())
         }
+    
+        def socket = TODO /* WebSocket.accept[]{ request =>
+            //................
+        } */
 
 }

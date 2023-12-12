@@ -15,6 +15,7 @@ POST        /putMessage                 controllers.MsgBoardWeb1_0.putMessage
 
 # TASK 7
 GET         /WSGame                     controllers.WSGame.index
+GET         /gameSocket                 controllers.WSGame.socket
 
 # TASK 8
 
