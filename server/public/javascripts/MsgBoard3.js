@@ -20,10 +20,12 @@ function login() {
         if (data){
             document.getElementById("login-section").hidden = true;
             document.getElementById("message-section").hidden = false;
+            document.getElementById("login-mess").innerHTML = "";
+            document.getElementById("create-mess").innerHTML = "";
             loadMessages();
         }
         else{
-
+            document.getElementById("login-mess").innerHTML = "Login Failed";
         }
     });
 }
@@ -66,9 +68,10 @@ function putMessage() {
             loadMessages();
             document.getElementById("message-to").value = "";
             document.getElementById("message-content").value = "";
+            document.getElementById("put-mess").innerHTML = "";
         }
         else{
-
+            document.getElementById("put-mess").innerHTML = "Put Message Failed";
         }
     });
 }
@@ -86,10 +89,12 @@ function createUser() {
         if (data){
             document.getElementById("login-section").hidden = true;
             document.getElementById("message-section").hidden = false;
+            document.getElementById("create-mess").innerHTML = "";
+            document.getElementById("login-mess").innerHTML = "";
             loadMessages();
         }
         else{
-
+            document.getElementById("create-mess").innerHTML = "Create User Failed";
         }
     });
 }

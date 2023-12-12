@@ -16,6 +16,17 @@ import javax.inject._
 @Singleton
 class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbstractController(cc){
 
+
+    def withJsonBody[A](f: A => Result)(implicit request: Request[AnyContent], reads: Reads[A]): Result = {
+        request.body.asJson.map { body =>
+        Json.fromJson[A](body) match {
+            case JsSuccess(a, path) => f(a)
+            case e @ JsError(_) => Redirect(routes.MsgBoard3.load)
+        }
+        }.getOrElse(Redirect(routes.MsgBoard3.load))
+    }
+
+
     implicit val userDataReads = Json.reads[UserData]
 
     def validate = Action { implicit request =>
