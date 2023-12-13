@@ -37,7 +37,7 @@ function loadMessages() {
     fetch(messagesRoute).then(res => res.json()).then(messages => {
         for (const message of messages){
             const li = document.createElement("li");
-            
+            //set the states in V2.2
             li.appendChild(document.createTextNode(message.sentAt));
             li.appendChild(document.createTextNode(" "))
             li.appendChild(document.createTextNode(message.from));

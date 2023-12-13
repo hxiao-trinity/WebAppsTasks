@@ -5,13 +5,13 @@
 
     <div id="react-root"></div>
     
-    <input type="hidden" id="csrfToken" value="@helper.CSRF.getToken.value"> 
-    <input type="hidden" id="validateRoute" value="@routes.MsgBoard3.validate"> 
-    <input type="hidden" id="tasksRoute" value="@routes.MsgBoard3.msgBoard"> 
-    <input type="hidden" id="createRoute" value="@routes.MsgBoard3.createUser"> 
-    <input type="hidden" id="addRoute" value="@routes.MsgBoard3.putMessage"> 
-    <input type="hidden" id="logoutRoute" value="@routes.MsgBoard3.logOut"> 
-    
+    <input type="hidden" id="csrfToken" value="@helper.CSRF.getToken.value">
+	<input type="hidden" id="validateRoute" value="@routes.MsgBoard3.validate">
+	<input type="hidden" id="messagesRoute" value="@routes.MsgBoard3.msgBoard">
+	<input type="hidden" id="createRoute" value="@routes.MsgBoard3.createUser">
+	<input type="hidden" id="putRoute" value="@routes.MsgBoard3.putMessage">
+	<input type="hidden" id="logOutRoute" value="@routes.MsgBoard3.logOut">
+
 
     <script src="@routes.Assets.versioned("javascripts/MsgBoard4.js")"></script>
     
