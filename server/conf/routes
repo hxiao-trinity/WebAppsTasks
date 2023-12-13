@@ -19,6 +19,7 @@ GET         /gameSocket                 controllers.WSGame.socket
 
 # TASK 8
 
+## V2.0
 GET         /load2                      controllers.MsgBoardAjax.load
 GET         /login2                     controllers.MsgBoardAjax.login
 POST        /validate2                  controllers.MsgBoardAjax.validate
@@ -27,13 +28,15 @@ POST        /putMessage2                controllers.MsgBoardAjax.putMessage
 GET         /logout2                    controllers.MsgBoardAjax.logOut
 GET         /generatedJS                controllers.MsgBoardAjax.generatedJS
 GET         /MsgBoard2                  controllers.MsgBoardAjax.msgBoard
-
+## V2.1
 GET         /load3                      controllers.MsgBoard3.load
 POST        /validate3                  controllers.MsgBoard3.validate
 GET         /MsgBoard3                  controllers.MsgBoard3.msgBoard
 POST        /putMessage3                controllers.MsgBoard3.putMessage
 POST        /create3                    controllers.MsgBoard3.createUser
 GET         /logout3                    controllers.MsgBoard3.logOut
+## V2.2
+GET         /load4                      controllers.MsgBoard4.load
 
 # TASK 9
 ## GET   /load5                          controllers.MsgBoardDB.load
