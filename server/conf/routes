@@ -5,7 +5,7 @@
 # TASK 5 - 6
 GET         /                             controllers.Application.index
 GET         /login                        controllers.MsgBoardWeb1_0.login
-# GET         /validateLoginGet             controllers.MsgBoardWeb1_0.validateLoginGet(username, password)
+## GET         /validateLoginGet             controllers.MsgBoardWeb1_0.validateLoginGet(username, password)
 POST        /validateLoginPost            controllers.MsgBoardWeb1_0.validateLoginPost
 POST        /createUser                   controllers.MsgBoardWeb1_0.createUser
 GET         /MsgBoard                     controllers.MsgBoardWeb1_0.msgBoard
@@ -36,12 +36,12 @@ POST        /create3                    controllers.MsgBoard3.createUser
 GET         /logout3                    controllers.MsgBoard3.logOut
 
 # TASK 9
-# GET   /load5                          controllers.MsgBoardDB.load
-# POST	/validate5						controllers.MsgBoardDB.validate
-# POST	/create5						controllers.MsgBoardDB.createUser
-# GET 	/MsgBoard5						controllers.MsgBoardDB.msgBoard
-# POST	/putMessage5					controllers.MsgBoardDB.putMessage
-# GET   /logout5						controllers.MsgBoardDB.logout
+## GET   /load5                          controllers.MsgBoardDB.load
+## POST	/validate5						controllers.MsgBoardDB.validate
+## POST	/create5						controllers.MsgBoardDB.createUser
+## GET 	/MsgBoard5						controllers.MsgBoardDB.msgBoard
+## POST	/putMessage5					controllers.MsgBoardDB.putMessage
+## GET   /logout5						controllers.MsgBoardDB.logout
 
 # Prefix must match `play.assets.urlPrefix`
 GET         /assets/*file                 controllers.Assets.at(file)

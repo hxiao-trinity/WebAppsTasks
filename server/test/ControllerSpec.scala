@@ -1,4 +1,4 @@
-/*
+
 import controllers.Application
 import org.scalatestplus.play.PlaySpec
 import play.api.test.FakeRequest
@@ -16,4 +16,3 @@ class ControllerSpec extends PlaySpec{
         }
     }
 }
-*/
