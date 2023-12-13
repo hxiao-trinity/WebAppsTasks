@@ -6,7 +6,7 @@ import org.scalatestplus.play.guice.GuiceOneServerPerSuite
 class MsgBoardWeb1_0Specs extends PlaySpec with GuiceOneServerPerSuite with OneBrowserPerSuite with HtmlUnitFactory {
     "MsgBoardWeb1_0" must {
 
-        "login and access functions" in {
+        "login and access initial messages" in {
             go to s"http://localhost:$port/login"
             pageTitle mustBe("Login")
             find(cssSelector("h2")).isEmpty mustBe false
@@ -20,19 +20,20 @@ class MsgBoardWeb1_0Specs extends PlaySpec with GuiceOneServerPerSuite with OneB
                 pageTitle mustBe("Message App")
                 find(cssSelector("h2")).isEmpty mustBe(false)
                 find(cssSelector("h2")).foreach(e => e.text mustBe("Message App"))
+                findAll(cssSelector("li")).toList.exists(_.text.contains("Hello, people")) mustBe true
+                findAll(cssSelector("li")).toList.exists(_.text.contains("Hello, Web")) mustBe true
             }
         }
 
         "put message" in {
-
-            // Sending a message
+            pageTitle mustBe "Message App" 
             textField("message-to").value = "web"
             textArea("message-content").value = "Web, how are you?"
             click on "put-message"
 
             eventually {
                 pageTitle mustBe "Message App"
-                findAll(cssSelector("li")).toList.map(_.text) mustBe "232323323232323232323"
+                findAll(cssSelector("li")).toList.exists(_.text.contains("Web, how are you?")) mustBe true
             }
         }
 
@@ -51,9 +52,9 @@ class MsgBoardWeb1_0Specs extends PlaySpec with GuiceOneServerPerSuite with OneB
             find(cssSelector("h2")).foreach(e => e.text mustBe("Message App"))
 
             click on "username-create"
-            textField("username-create").value = "randomWebAppStudent"
+            textField("username-create").value = "2320stu"
             click on "password-create"
-            pwdField("password-create").value = "password123456"
+            pwdField("password-create").value = "dataabs"
             submit()
             eventually{
                 pageTitle mustBe "Message App"
@@ -66,11 +67,14 @@ class MsgBoardWeb1_0Specs extends PlaySpec with GuiceOneServerPerSuite with OneB
             click on "put-message"
 
             textField("message-to").value = "mlewis" 
-            textArea("message-content").value = "Why I got this error?"
+            textArea("message-content").value = "How can I implement an AVL tree?"
             click on "put-message"
 
             eventually {
                 pageTitle mustBe "Message App"
+                pageTitle mustBe "Message App"
+                findAll(cssSelector("li")).toList.exists(_.text.contains("2320stu TO mlewis: Dr Lewis, a quick question.")) mustBe true
+                findAll(cssSelector("li")).toList.exists(_.text.contains("2320stu TO mlewis: How can I implement an AVL tree?")) mustBe true
                 // Additional checks to verify the messages
             }
         }
