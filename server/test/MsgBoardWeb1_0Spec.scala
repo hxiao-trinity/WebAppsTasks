@@ -75,7 +75,22 @@ class MsgBoardWeb1_0Specs extends PlaySpec with GuiceOneServerPerSuite with OneB
                 pageTitle mustBe "Message App"
                 findAll(cssSelector("li")).toList.exists(_.text.contains("2320stu TO mlewis: Dr Lewis, a quick question.")) mustBe true
                 findAll(cssSelector("li")).toList.exists(_.text.contains("2320stu TO mlewis: How can I implement an AVL tree?")) mustBe true
-                // Additional checks to verify the messages
+                click on "logout1"
+                eventually {
+                    click on "username-login"
+                    textField("username-login").value = "mlewis"
+                    click on "password-login"
+                    pwdField("password-login").value = "prof"
+                    submit()
+                    eventually{
+                        pageTitle mustBe "Message App"
+                        find(cssSelector("h2")).isEmpty mustBe(false)
+                        find(cssSelector("h2")).foreach(e => e.text mustBe("Message App"))
+                        findAll(cssSelector("li")).toList.exists(_.text.contains("2320stu TO mlewis: Dr Lewis, a quick question.")) mustBe true
+                        findAll(cssSelector("li")).toList.exists(_.text.contains("2320stu TO mlewis: How can I implement an AVL tree?")) mustBe true
+                    }
+                }
+
             }
         }
 
