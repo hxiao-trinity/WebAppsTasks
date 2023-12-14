@@ -40,10 +40,10 @@ class LoginComponent extends React.Component{
         return ce('div', { id: 'login-section' },
             ce('div', null,
                 'Username: ',
-                ce('input', { type: 'text', id: 'loginName', value: this.state.loginName, onChange: e=> this.changeHandler(e)}),
+                ce('input', { type: 'text', id: 'loginName', value: this.state.loginName, onChange: e => this.changeHandler(e)}),
                 ce('br'),
                 'Password: ',
-                ce('input', { type: 'password', id: 'loginPass', value: this.state.loginPass, onChange: e=> this.changeHandler(e) }),
+                ce('input', { type: 'password', id: 'loginPass', value: this.state.loginPass, onChange: e => this.changeHandler(e) }),
                 ce('br'),
                 ce('button', { onClick: e => this.login(e) }, 'Login'),
                 ce('span', { id: 'login-mess'}, this.state.loginMess),
@@ -51,10 +51,10 @@ class LoginComponent extends React.Component{
             ),
             ce('div', null,
                 'Username: ',
-                ce('input', { type: 'text', id: 'createName', value: this.state.createName, onChange: e=> this.changeHandler(e) }),
+                ce('input', { type: 'text', id: 'createName', value: this.state.createName, onChange: e => this.changeHandler(e) }),
                 ce('br'),
                 'Password: ',
-                ce('input', { type: 'password', id: 'createPass', value: this.state.createPass, onChange: e=> this.changeHandler(e) }),
+                ce('input', { type: 'password', id: 'createPass', value: this.state.createPass, onChange: e => this.changeHandler(e) }),
                 ce('br'),
                 ce('button', { onClick: e => this.createUser(e) }, 'Create User'),
                 ce('span', { id: 'create-mess'}, this.state.createMess),
@@ -87,17 +87,22 @@ class LoginComponent extends React.Component{
 
 class MsgBoardComponent extends React.Component{
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state = {messages: []}
+        this.state = {
+            messageList: [],
+            messageTo: '',
+            messageContent: ''
+        };
     }
+
 
     render(){
         return ce('div', null, 'Message App V2.2',
                     ce('br'),
                     ce('ul', null,
                         //fetch: 
-                        ce('li', null, '1900-01-01 18:00:00 A TO B: Hi, B!') 
+                        ce('li', null, this.state.messageList.map(message => ce('li', null, message)))
                     ),
                     ce('br'),
                     ce('div', null, 
