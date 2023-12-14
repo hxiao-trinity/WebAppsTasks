@@ -98,7 +98,7 @@ class LoginComponent extends React.Component{
             this.setState({ createMess: "User Creation Failed"});
           }
         });
-      }
+    }
 
 
 }
@@ -117,31 +117,30 @@ class MsgBoardComponent extends React.Component{
     componentDidMount() {
         this.loadMessages();
     }
-//HHHHHHHHHHHHHHHHHHH
+
     renderMessageItem(message) {
         const toPart = message.to ? ` TO ${message.to}` : ' TO PUBLIC';
         //const sentAtFormatted = message.sentAt; // Format if necessary
-
+        console.log("renderMessageItem() is called");
         return ce('li', 
-            { key: message.id, onClick: () => this.handleMessageClick(message) },
+            { key: message.id, onClick: () => this.handlePutClick(message) },
             `${message.sentAt} ${message.from}${toPart}: ${message.content}`
         );
     }
 
-    handleMessageClick(message) {
-        // Click event logic
+    handleToInputChange = (e) => {
+        this.setState({messageTo: e.target.value});
+        //this.setState({ [e.target.id]: e.target.value });
+        console.log("handleInputChange() is called");
     }
 
-    handleInputChange = (event) => {
-        this.setState({ [event.target.id]: event.target.value });
+    handleContentInputChange = (e) => {
+        this.setState({messageContent: e.target.value});
+        //this.setState({ [e.target.id]: e.target.value });
+        console.log("handleInputChange() is called");
     }
 
-    putMessage = () => {
-        // Logic to submit the new message
-    }
 
-
-//HHHHHHHHHHHHHHHHHH
 /*
     render(){
         return ce('div', null, 'Message App V2.2',
@@ -175,15 +174,15 @@ class MsgBoardComponent extends React.Component{
                         type: 'text',
                         id: 'message-to',
                         value: this.state.to,
-                        onChange: this.handleInputChange
+                        onChange: e => this.handleToInputChange(e)
                     }),
                     ce('br'),
                     ce('textarea', {
                         id: 'message-content',
                         value: this.state.content,
-                        onChange: this.handleInputChange
+                        onChange: e => this.handleContentInputChange(e)
                     }),
-                    ce('button', { onClick: e => this.handleMessageClick(e) /*this.putMessage*/ }, 'Put Message'),
+                    ce('button', { onClick: e => this.handlePutClick(e) }, 'Put Message'),
                     ce('br'),
                     ce('button', {onClick: e => this.props.doLogout()}, 'Log Out')
                 );
@@ -193,6 +192,7 @@ class MsgBoardComponent extends React.Component{
         const from = this.state.messageTo;
         const content = this.state.messageContent;
         const to = this.state.messageTo;
+        console.log("handlePutClick() is called.")
         fetch(putRoute, { 
             method: 'POST',
             headers: {'Content-Type': 'application/json', 'Csrf-Token':csrfToken},
@@ -232,23 +232,6 @@ ReactDOM.render(
     ),
     document.getElementById('react-root')
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
