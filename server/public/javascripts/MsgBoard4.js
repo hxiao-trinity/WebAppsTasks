@@ -1,4 +1,3 @@
-console.log("running V2.2");
 
 const ce = React.createElement
 
@@ -8,6 +7,7 @@ const messagesRoute = document.getElementById("messagesRoute").value;
 const createRoute = document.getElementById("createRoute").value;
 const putRoute = document.getElementById("putRoute").value;
 const logOutRoute = document.getElementById("logOutRoute").value;
+
 
 class Main4Component extends React.Component{
     constructor(props){
@@ -96,7 +96,35 @@ class MsgBoardComponent extends React.Component{
         };
     }
 
+    componentDidMount() {
+        this.loadMessages();
+    }
+//HHHHHHHHHHHHHHHHHHH
+    renderMessageItem(message) {
+        const toPart = message.to ? ` TO ${message.to}` : 'TO PUBLIC';
+        //const sentAtFormatted = message.sentAt; // Format if necessary
 
+        return ce('li', 
+            { key: message.id, onClick: () => this.handleMessageClick(message) },
+            `${message.sentAt} ${message.from}${toPart}: ${message.content}`
+        );
+    }
+
+    handleMessageClick(message) {
+        // Click event logic
+    }
+
+    handleInputChange = (event) => {
+        this.setState({ [event.target.id]: event.target.value });
+    }
+
+    putMessage = () => {
+        // Logic to submit the new message
+    }
+
+
+//HHHHHHHHHHHHHHHHHH
+/*
     render(){
         return ce('div', null, 'Message App V2.2',
                     ce('br'),
@@ -113,7 +141,46 @@ class MsgBoardComponent extends React.Component{
                     ce('button', {onClick: e => this.props.doLogout()}, 'Log Out')
                 );
     }
+*/
+
+    render() {
+        const messageItems = this.state.messageList.map(message => this.renderMessageItem(message));
+        
+        return  ce('div', 
+                    null,
+                    ce('h2', null, 'Message App V2.2'),
+                    ce('br'),
+                    ce('span', { id: 'put-mess' }),
+                    ce('br'),
+                    ce('ul', { id: 'message-list' }, ...messageItems),
+                    ce('input', {
+                        type: 'text',
+                        id: 'message-to',
+                        value: this.state.to,
+                        onChange: this.handleInputChange
+                    }),
+                    ce('br'),
+                    ce('textarea', {
+                        id: 'message-content',
+                        value: this.state.content,
+                        onChange: this.handleInputChange
+                    }),
+                    ce('button', { onClick: this.putMessage }, 'Put Message')
+                );
+    }
+
+
+    loadMessages() {
+        fetch(messagesRoute).then(res => res.json()).then(messages => this.setState({messageList:messages}))
+                                                    .catch(error => console.error('Error fetching messages:', error));
+    }
+
+
+
+
 }
+
+
 
 ReactDOM.render(
     ce(
