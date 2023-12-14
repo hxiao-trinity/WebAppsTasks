@@ -32,7 +32,8 @@ class LoginComponent extends React.Component{
         createName:"", 
         createPass:"",
         loginMess:"",
-        createMess:""
+        createMess:"",
+        putMess:"" //mess = the error message being displayed, not the message in the app.
         };
     }
 
@@ -83,6 +84,23 @@ class LoginComponent extends React.Component{
         });
     }
 
+    createUser() {
+        const username = this.state.createName;
+        const password = this.state.createPass;
+        fetch(createRoute, { 
+          method: 'POST',
+          headers: {'Content-Type': 'application/json', 'Csrf-Token': csrfToken },
+          body: JSON.stringify({ username, password })
+        }).then(res => res.json()).then(data => {
+          if(data) {
+            this.props.doLogin();
+          } else {
+            this.setState({ createMess: "User Creation Failed"});
+          }
+        });
+      }
+
+
 }
 
 class MsgBoardComponent extends React.Component{
@@ -101,7 +119,7 @@ class MsgBoardComponent extends React.Component{
     }
 //HHHHHHHHHHHHHHHHHHH
     renderMessageItem(message) {
-        const toPart = message.to ? ` TO ${message.to}` : 'TO PUBLIC';
+        const toPart = message.to ? ` TO ${message.to}` : ' TO PUBLIC';
         //const sentAtFormatted = message.sentAt; // Format if necessary
 
         return ce('li', 
@@ -165,8 +183,34 @@ class MsgBoardComponent extends React.Component{
                         value: this.state.content,
                         onChange: this.handleInputChange
                     }),
-                    ce('button', { onClick: this.putMessage }, 'Put Message')
+                    ce('button', { onClick: e => this.handleMessageClick(e) /*this.putMessage*/ }, 'Put Message'),
+                    ce('br'),
+                    ce('button', {onClick: e => this.props.doLogout()}, 'Log Out')
                 );
+    }
+
+    handlePutClick(e){
+        const from = this.state.messageTo;
+        const content = this.state.messageContent;
+        const to = this.state.messageTo;
+        fetch(putRoute, { 
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'Csrf-Token':csrfToken},
+            body: JSON.stringify({from, content, to})
+        }).then(res => res.json()).then(data => {
+            console.log(data);
+            if (data){
+                this.loadMessages();    
+                this.setState({putMess:""})
+                //document.getElementById("message-to").value = "";
+                //document.getElementById("message-content").value = "";
+                //document.getElementById("put-mess").innerHTML = "";
+            }
+            else{
+                this.setState({putMess:"Put Message failed."})
+                //document.getElementById("put-mess").innerHTML = "Put Message Failed";
+            }
+        });
     }
 
 
