@@ -1,0 +1,16 @@
+@**@
+
+@(startRoute:String)(implicit request:RequestHeader, flash:Flash)
+
+@main("Message App V2.0"){
+    <div id="contents"></div>
+
+    <input type="hidden" id="csrfToken" value="@helper.CSRF.getToken.value">
+	<input type="hidden" id="loginRoute" value="@startRoute">
+	<input type="hidden" id="validateRoute" value="@routes.MsgBoard2.validate">
+	<input type="hidden" id="createRoute" value="@routes.MsgBoard2.createUser">
+	<input type="hidden" id="putRoute" value="@routes.MsgBoard2.putMessage">
+
+    <script src="@routes.Assets.versioned("javascripts/MsgBoard2.js")"></script>
+	@*<script src="@routes.MsgBoard2.generatedJS"></script>*@
+}

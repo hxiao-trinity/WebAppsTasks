@@ -3,7 +3,7 @@
 
 @* MsgBoardAjax template file*@
 
-@(loggedInWith:String, messages: Seq[models.MsgBoardModel1.Message])
+@(loggedInWith:String, messages: Seq[models.MemModel.Message])
 
 <h2>Message App V2.0</h2>
     Welcome, @loggedInWith.
@@ -33,5 +33,5 @@
 
 
     <div>
-        <a href="@routes.MsgBoardAjax.logOut">Logout</a>
+        <a href="@routes.MsgBoard2.logOut">Logout</a>
     </div>

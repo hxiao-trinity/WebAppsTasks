@@ -1,6 +1,6 @@
 package controllers
-/*
-import models.MsgBoardModel1._
+
+import models.MemModel._
 import models._
 import play.api.data.Forms._
 import play.api.data._
@@ -20,8 +20,8 @@ import scala.concurrent.Future
 class MsgBoard5 @Inject() (protected val dbConfigProvider: DatabaseConfigProvider, cc: ControllerComponents)
                           (implicit ec:ExecutionContext) 
                 extends AbstractController(cc) with HasDatabaseConfigProvider[JdbcProfile]{
-
-    private val model = new MsgBoardDBModel(db)
+/*
+    private val model = new DbModel(db)
 
     def withJsonBody[A](f: A => Future[Result])(implicit request: Request[AnyContent], reads: Reads[A]): Future[Result] = {
         request.body.asJson.map { body =>
@@ -106,9 +106,8 @@ class MsgBoard5 @Inject() (protected val dbConfigProvider: DatabaseConfigProvide
 
 
 
-
+*/
 
 }
 
 
-*/

@@ -1,6 +1,6 @@
 package controllers
 
-import models.MsgBoardModel1._
+import models.MemModel._
 import models._
 import play.api.data.Forms._
 import play.api.data._
@@ -36,7 +36,7 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
 
     def validate = Action { implicit request =>
         withJsonBody[UserData] { ud =>
-            if (MsgBoardModel1.validateUser(ud.username, ud.password)) {
+            if (MemModel.validateUser(ud.username, ud.password)) {
                 Ok(Json.toJson(true))
                 .withSession("username" -> ud.username, "csrfToken" -> play.filters.csrf.CSRF.getToken.map(_.value).getOrElse(""))
             } else {
@@ -50,7 +50,7 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
         request.body.asJson.map{ body =>
             Json.fromJson[UserData](body) match {
                 case JsSuccess(ud, path) => 
-                    if (MsgBoardModel1.validateUser(ud.username, ud.password)) {
+                    if (MemModel.validateUser(ud.username, ud.password)) {
                         Ok(Json.toJson(true))
                             .withSession("username" -> ud.username, "csrfToken" -> play.filters.csrf.CSRF.getToken.get.value)
                     }
@@ -69,7 +69,7 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
 
     def msgBoard = Action { implicit request =>
         withSessionUsername { username =>
-            Ok(Json.toJson(MsgBoardModel1.getMessages(username)))
+            Ok(Json.toJson(MemModel.getMessages(username)))
         }
     } 
 
@@ -77,7 +77,7 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
     def msgBoard = Action { implicit request =>
         val usernameOption = request.session.get("username")
         usernameOption.map{ username => 
-            Ok(Json.toJson(MsgBoardModel1.getMessages(username)))
+            Ok(Json.toJson(MemModel.getMessages(username)))
         }.getOrElse(Ok(Json.toJson(Seq.empty[String])))
     } 
 */
@@ -86,9 +86,9 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
         withSessionUsername { username =>
             withJsonBody[Message] { task =>
                 if (task.to.isDefined && task.to.nonEmpty)
-                    MsgBoardModel1.putMessage(username, task.content, task.to)
+                    MemModel.putMessage(username, task.content, task.to)
                 else
-                    MsgBoardModel1.putMessage(username, task.content)
+                    MemModel.putMessage(username, task.content)
                 Ok(Json.toJson(true))
             }
         }
@@ -99,17 +99,17 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
         val usernameOption = request.session.get("username")
         usernameOption.map{ username =>
             request.body.asJson.map{ body =>
-                println("What's going to be matched? " + Json.fromJson[MsgBoardModel1.Message](body))
-                Json.fromJson[MsgBoardModel1.Message](body) match {
+                println("What's going to be matched? " + Json.fromJson[MemModel.Message](body))
+                Json.fromJson[MemModel.Message](body) match {
                     case JsSuccess(message, path) => 
                         message.to match {
                             case Some(toValue) => 
-                                models.MsgBoardModel1.putMessage(username, message.content, Some(toValue))
+                                models.MemModel.putMessage(username, message.content, Some(toValue))
                             case None => 
-                                models.MsgBoardModel1.putMessage(username, message.content)
+                                models.MemModel.putMessage(username, message.content)
                         }
                         Ok(Json.toJson(true))
-                        //Ok(views.html.MsgBoardAjax(username, MsgBoardModel1.getMessages(username)))
+                        //Ok(views.html.MsgBoardAjax(username, MemModel.getMessages(username)))
 
                     case e @ JsError(_) => BadRequest("P In putMessage(), Json.fromJson[Message](body) match JsError") //Redirect(routes.MsgBoard3.load)
                 }
@@ -120,7 +120,7 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
 
     def createUser = Action { implicit request =>
         withJsonBody[UserData] { ud =>
-            if (MsgBoardModel1.createUser(ud.username, ud.password)) {
+            if (MemModel.createUser(ud.username, ud.password)) {
                 Ok(Json.toJson(true))
                 .withSession("username" -> ud.username, "csrfToken" -> play.filters.csrf.CSRF.getToken.map(_.value).getOrElse(""))
             } else {
@@ -134,7 +134,7 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
         request.body.asJson.map{ body =>
             Json.fromJson[UserData](body) match {
                 case JsSuccess(ud, path) => 
-                    if (MsgBoardModel1.createUser(ud.username, ud.password)) {
+                    if (MemModel.createUser(ud.username, ud.password)) {
                         Ok(Json.toJson(true))
                             .withSession("username" -> ud.username, "csrfToken" -> play.filters.csrf.CSRF.getToken.get.value)
                     }

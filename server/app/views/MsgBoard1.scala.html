@@ -1,11 +1,11 @@
 @import java.time.format.DateTimeFormatter
 @import java.time.LocalDateTime
 
-@(loggedInWith:String, messages:Seq[models.MsgBoardModel1.Message])(implicit request:RequestHeader, flash:Flash)
+@(loggedInWith:String, messages:Seq[models.MemModel.Message])(implicit request:RequestHeader, flash:Flash)
 
 
-@main("Message App"){
-    <h2>Message App</h2>
+@main("Message App V1.0"){
+    <h2>Message App V1.0</h2>
     Welcome, @loggedInWith.
     <br></br>
 
@@ -20,7 +20,7 @@
 
     <br></br>
 
-    <form method="post" action="@routes.MsgBoardWeb1_0.putMessage">
+    <form method="post" action="@routes.MsgBoard1.putMessage">
         @helper.CSRF.formField
         To: <input type="text" name="to" id="message-to"></input>
         <br></br>
@@ -32,6 +32,6 @@
 
 
     <div>
-        <a href="@routes.MsgBoardWeb1_0.logOut" id="logout1">Logout</a>
+        <a href="@routes.MsgBoard1.logOut" id="logout1">Logout</a>
     </div>
 }

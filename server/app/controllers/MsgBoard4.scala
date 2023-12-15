@@ -1,6 +1,6 @@
 package controllers
 
-import models.MsgBoardModel1._
+import models.MemModel._
 import models._
 import play.api.data.Forms._
 import play.api.data._
@@ -13,16 +13,8 @@ import javax.inject._
 @Singleton
 class MsgBoard4 @Inject() (cc: ControllerComponents) extends AbstractController(cc){
 
-
     def load() = Action { implicit request =>
         Ok(views.html.MsgBoard4Main())
     }
-
-
-
-
-
-
-
 
 }

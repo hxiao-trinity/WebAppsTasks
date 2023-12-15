@@ -1,14 +1,14 @@
 @()
 
-$("#contents").load("/login2").load("@routes.MsgBoardAjax.login")
+$("#contents").load("/login2").load("@routes.MsgBoard2.login")
 
-console.log("MsgBoardAjax.js loaded");
+console.log("MsgBoard2.js loaded");
 
 function login() {
     const username = $("#loginName").val();
     const password = $("#loginPass").val();
-    @* $("#contents").load("@routes.MsgBoardAjax.validate"); *@
-    $("#contents").load("/validate2?username=" + username + "&password=" + password); 
+    @* $("#contents").load("@routes.MsgBoard2.validate");
+    $("#contents").load("/validate2?username=" + username + "&password=" + password); *@
 }
 
 function createUser() {

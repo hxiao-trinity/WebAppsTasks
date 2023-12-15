@@ -14,7 +14,7 @@ import scala.concurrent.Future
 
 
 
-class MsgBoardDBModel(db:Database)(implicit ec:ExecutionContext){
+class DbModel(db:Database)(implicit ec:ExecutionContext){
 
     case class Message(from:String, content:String, to:Option[String] = None, sentAt:LocalDateTime = LocalDateTime.now())
 

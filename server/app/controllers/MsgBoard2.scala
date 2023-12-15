@@ -1,6 +1,6 @@
 package controllers
 
-import models.MsgBoardModel1
+import models.MemModel
 import play.api.data.Forms._
 import play.api.data._
 import play.api.i18n._
@@ -9,12 +9,12 @@ import play.api.mvc._
 import javax.inject._
 
 @Singleton
-class MsgBoardAjax @Inject() (cc: MessagesControllerComponents) extends MessagesAbstractController(cc){
+class MsgBoard2 @Inject() (cc: MessagesControllerComponents) extends MessagesAbstractController(cc){
     def load = Action { implicit request =>
         val usernameOption = request.session.get("username")
         usernameOption.map{ username => 
-            Ok(views.html.MsgBoardAjaxMain(routes.MsgBoardAjax.msgBoard.toString))
-        }.getOrElse(Ok(views.html.MsgBoardAjaxMain(routes.MsgBoardAjax.login.toString)))
+            Ok(views.html.MsgBoard2Main(routes.MsgBoard2.msgBoard.toString))
+        }.getOrElse(Ok(views.html.MsgBoard2Main(routes.MsgBoard2.login.toString)))
     }
 
     def login = Action{ implicit request =>
@@ -24,7 +24,7 @@ class MsgBoardAjax @Inject() (cc: MessagesControllerComponents) extends Messages
     def msgBoard = Action { implicit request =>
         val usernameOption = request.session.get("username")
         usernameOption.map{ username => 
-            Ok(views.html.MsgBoardAjax(username, MsgBoardModel1.getMessages(username)))
+            Ok(views.html.MsgBoard2(username, MemModel.getMessages(username)))
         }.getOrElse(Ok(views.html.login2()))
     }
 
@@ -33,8 +33,8 @@ class MsgBoardAjax @Inject() (cc: MessagesControllerComponents) extends Messages
         postVals.map { args =>
             val username = args("username").head
             val password = args("password").head
-            if (MsgBoardModel1.validateUser(username, password)) 
-                Ok(views.html.MsgBoardAjax(username, MsgBoardModel1.getMessages(username)))
+            if (MemModel.validateUser(username, password)) 
+                Ok(views.html.MsgBoard2(username, MemModel.getMessages(username)))
                     .withSession("username" -> username, "csrfToken" -> play.filters.csrf.CSRF.getToken.get.value)
             else
                 Ok(views.html.login2())
@@ -47,12 +47,12 @@ class MsgBoardAjax @Inject() (cc: MessagesControllerComponents) extends Messages
         postVals.map { args =>
         val username = args("username").head
         val password = args("password").head
-        if (MsgBoardModel1.createUser(username, password)) 
-            Ok(views.html.MsgBoardAjax(username, MsgBoardModel1.getMessages(username)))
+        if (MemModel.createUser(username, password)) 
+            Ok(views.html.MsgBoard2(username, MemModel.getMessages(username)))
                 .withSession("username" -> username, "csrfToken" -> play.filters.csrf.CSRF.getToken.get.value)
         else
             Ok(views.html.login2())
-        }.getOrElse(Redirect(routes.MsgBoardWeb1_0.login))
+        }.getOrElse(Redirect(routes.MsgBoard1.login))
     }
 
     def putMessage = Action { implicit request =>
@@ -65,12 +65,12 @@ class MsgBoardAjax @Inject() (cc: MessagesControllerComponents) extends Messages
                 val to = args("to_user").head
                 println("Post Vals: " + postVals) // Add this line for debugging
                 if (!to.isEmpty){
-                    models.MsgBoardModel1.putMessage(username, content, Some(to))
+                    models.MemModel.putMessage(username, content, Some(to))
                 }
                 else{
-                    models.MsgBoardModel1.putMessage(username, content)
+                    models.MemModel.putMessage(username, content)
                 }
-                Ok(views.html.MsgBoardAjax(username, MsgBoardModel1.getMessages(username)))
+                Ok(views.html.MsgBoard2(username, MemModel.getMessages(username)))
                 .withSession("username" -> username, "csrfToken" -> play.filters.csrf.CSRF.getToken.get.value)
             }.getOrElse(Ok(views.html.login2()))
         }.getOrElse(Ok(views.html.login2()))
@@ -80,7 +80,7 @@ class MsgBoardAjax @Inject() (cc: MessagesControllerComponents) extends Messages
 
 
     def logOut = Action {
-        Redirect(routes.MsgBoardAjax.load).withNewSession
+        Redirect(routes.MsgBoard2.load).withNewSession
     }
 
     def generatedJS = Action {

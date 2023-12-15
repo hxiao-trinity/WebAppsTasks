@@ -4,30 +4,29 @@
 
 # TASK 5 - 6
 GET         /                             controllers.Application.index
-GET         /login                        controllers.MsgBoardWeb1_0.login
-## GET         /validateLoginGet             controllers.MsgBoardWeb1_0.validateLoginGet(username, password)
-POST        /validateLoginPost            controllers.MsgBoardWeb1_0.validateLoginPost
-POST        /createUser                   controllers.MsgBoardWeb1_0.createUser
-GET         /MsgBoard                     controllers.MsgBoardWeb1_0.msgBoard
-GET         /logout                       controllers.MsgBoardWeb1_0.logOut
+GET         /login                        controllers.MsgBoard1.login
+## GET         /validateLoginGet             controllers.MsgBoard1.validateLoginGet(username, password)
+POST        /validateLoginPost            controllers.MsgBoard1.validateLoginPost
+POST        /createUser                   controllers.MsgBoard1.createUser
+GET         /MsgBoard                     controllers.MsgBoard1.msgBoard
+GET         /logout                       controllers.MsgBoard1.logOut
 + nocsrf
-POST        /putMessage                 controllers.MsgBoardWeb1_0.putMessage
+POST        /putMessage                 controllers.MsgBoard1.putMessage
 
 # TASK 7
 GET         /WSGame                     controllers.WSGame.index
 GET         /gameSocket                 controllers.WSGame.socket
 
 # TASK 8
-
 ## V2.0
-GET         /load2                      controllers.MsgBoardAjax.load
-GET         /login2                     controllers.MsgBoardAjax.login
-POST        /validate2                  controllers.MsgBoardAjax.validate
-POST        /create2                    controllers.MsgBoardAjax.createUser
-POST        /putMessage2                controllers.MsgBoardAjax.putMessage
-GET         /logout2                    controllers.MsgBoardAjax.logOut
-GET         /generatedJS                controllers.MsgBoardAjax.generatedJS
-GET         /MsgBoard2                  controllers.MsgBoardAjax.msgBoard
+GET         /load2                      controllers.MsgBoard2.load
+GET         /login2                     controllers.MsgBoard2.login
+POST        /validate2                  controllers.MsgBoard2.validate
+POST        /create2                    controllers.MsgBoard2.createUser
+POST        /putMessage2                controllers.MsgBoard2.putMessage
+GET         /logout2                    controllers.MsgBoard2.logOut
+GET         /generatedJS                controllers.MsgBoard2.generatedJS
+GET         /MsgBoard2                  controllers.MsgBoard2.msgBoard
 ## V2.1
 GET         /load3                      controllers.MsgBoard3.load
 POST        /validate3                  controllers.MsgBoard3.validate
@@ -39,12 +38,12 @@ GET         /logout3                    controllers.MsgBoard3.logOut
 GET         /load4                      controllers.MsgBoard4.load
 
 # TASK 9
-## GET   /load5                          controllers.MsgBoardDB.load
-## POST	/validate5						controllers.MsgBoardDB.validate
-## POST	/create5						controllers.MsgBoardDB.createUser
-## GET 	/MsgBoard5						controllers.MsgBoardDB.msgBoard
-## POST	/putMessage5					controllers.MsgBoardDB.putMessage
-## GET   /logout5						controllers.MsgBoardDB.logout
+# GET     /load5                          controllers.MsgBoard5.load
+# POST	/validate5						controllers.MsgBoard5.validate
+# POST	/create5						controllers.MsgBoard5.createUser
+# GET 	/MsgBoard5						controllers.MsgBoard5.msgBoard
+# POST	/putMessage5					controllers.MsgBoard5.putMessage
+# GET     /logout5						controllers.MsgBoard5.logout
 
 # Prefix must match `play.assets.urlPrefix`
 GET         /assets/*file                 controllers.Assets.at(file)
