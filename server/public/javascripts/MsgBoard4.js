@@ -121,7 +121,6 @@ class MsgBoardComponent extends React.Component{
     renderMessageItem(message) {
         const toPart = message.to ? ` TO ${message.to}` : ' TO PUBLIC';
         //const sentAtFormatted = message.sentAt; // Format if necessary
-        console.log("renderMessageItem() is called");
         return ce('li', 
             { key: message.id, onClick: () => this.handlePutClick(message) },
             `${message.sentAt} ${message.from}${toPart}: ${message.content}`
@@ -131,13 +130,11 @@ class MsgBoardComponent extends React.Component{
     handleToInputChange = (e) => {
         this.setState({messageTo: e.target.value});
         //this.setState({ [e.target.id]: e.target.value });
-        console.log("handleInputChange() is called");
     }
 
     handleContentInputChange = (e) => {
         this.setState({messageContent: e.target.value});
         //this.setState({ [e.target.id]: e.target.value });
-        console.log("handleInputChange() is called");
     }
 
 
