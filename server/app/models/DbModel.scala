@@ -19,7 +19,9 @@ class DbModel(db:Database)(implicit ec:ExecutionContext){
     case class Message(from:String, content:String, to:Option[String] = None, sentAt:LocalDateTime = LocalDateTime.now())
 
     def validateUser(username:String, password:String) : Future[Boolean] = {
-        val matches = db.run(Users.filter(userRow => userRow.username === username && userRow.password === password).result)
+        val matches = db.run(
+            Users.filter(userRow => userRow.username === username && userRow.password === password).result
+        )
         matches.map(userRows => userRows.nonEmpty)
     }
 

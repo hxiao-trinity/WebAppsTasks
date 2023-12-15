@@ -120,7 +120,6 @@ class MsgBoardComponent extends React.Component{
 
     renderMessageItem(message) {
         const toPart = message.to ? ` TO ${message.to}` : ' TO PUBLIC';
-        //const sentAtFormatted = message.sentAt; // Format if necessary
         return ce('li', 
             { key: message.id, onClick: () => this.handlePutClick(message) },
             `${message.sentAt} ${message.from}${toPart}: ${message.content}`
@@ -193,7 +192,7 @@ class MsgBoardComponent extends React.Component{
         fetch(putRoute, { 
             method: 'POST',
             headers: {'Content-Type': 'application/json', 'Csrf-Token':csrfToken},
-            body: JSON.stringify({from, content, to})
+            body: to != "" ? JSON.stringify({from, content, to}) : JSON.stringify({from, content})
         }).then(res => res.json()).then(data => {
             console.log(data);
             if (data){
@@ -215,8 +214,6 @@ class MsgBoardComponent extends React.Component{
         fetch(messagesRoute).then(res => res.json()).then(messages => this.setState({messageList:messages}))
                                                     .catch(error => console.error('Error fetching messages:', error));
     }
-
-
 
 
 }

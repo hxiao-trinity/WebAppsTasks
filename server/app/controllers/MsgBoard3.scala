@@ -19,6 +19,7 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
 
     def withJsonBody[A](f: A => Result)(implicit request: Request[AnyContent], reads: Reads[A]): Result = {
         request.body.asJson.map { body =>
+            println(body)
         Json.fromJson[A](body) match {
             case JsSuccess(a, path) => f(a)
             case e @ JsError(_) => Redirect(routes.MsgBoard3.load)
@@ -69,6 +70,7 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
 
     def msgBoard = Action { implicit request =>
         withSessionUsername { username =>
+            println(username + " " + MemModel.getMessages(username))
             Ok(Json.toJson(MemModel.getMessages(username)))
         }
     } 
@@ -84,11 +86,11 @@ class MsgBoard3 @Inject() (cc: MessagesControllerComponents) extends MessagesAbs
 
     def putMessage = Action { implicit request =>
         withSessionUsername { username =>
-            withJsonBody[Message] { task =>
-                if (task.to.isDefined && task.to.nonEmpty)
-                    MemModel.putMessage(username, task.content, task.to)
+            withJsonBody[Message] { message =>
+                if (message.to.isDefined && message.to.nonEmpty)
+                    MemModel.putMessage(username, message.content, message.to)
                 else
-                    MemModel.putMessage(username, task.content)
+                    MemModel.putMessage(username, message.content)
                 Ok(Json.toJson(true))
             }
         }

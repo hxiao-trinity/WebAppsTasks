@@ -35,6 +35,7 @@ object MemModel {
         messages += Message(from, content, to)
     }
 
+/*
     def getMessagesSentBy(fromUsername: String): Seq[Message] = {
         messages.filter(_.from.contains(fromUsername)).toSeq
     }
@@ -43,10 +44,10 @@ object MemModel {
         messages.filter(_.to.contains(toUsername)).toSeq
     }
 
-    //Get all PUBLIC messages. If that one is from fromUsername, count ONCE.
     def getPublicMessages(exceptFromUsername:String): Seq[Message] = { 
         (messages.filter(_.to.isEmpty)).filterNot((_.from.equals(exceptFromUsername))).toSeq
     }
+*/
 
     def getMessages(currentUsername:String) :Seq[Message] = {
         //(getMessagesSentTo(currentUsername) ++ getMessagesSentBy(currentUsername) ++ getPublicMessages(currentUsername))
