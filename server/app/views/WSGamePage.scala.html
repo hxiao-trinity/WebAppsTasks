@@ -1,7 +1,7 @@
 @()(implicit request: RequestHeader, flash:Flash)
 
 @main("Websocket Game"){
-
+@*
     Press DIRECTION KEYS
     <input type="hidden" id="ws-route" value="@routes.WSGame.socket.absoluteURL()"></input>
     
@@ -11,5 +11,5 @@
    
 
     <script src="@routes.Assets.versioned("javascripts/WSGame.js")" type="text/javascript"></script>
-
+*@
 }

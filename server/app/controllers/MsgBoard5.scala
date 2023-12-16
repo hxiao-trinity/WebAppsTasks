@@ -36,52 +36,56 @@ class MsgBoard5 @Inject() (protected val dbConfigProvider: DatabaseConfigProvide
         request.session.get("username").map(f).getOrElse(Future.successful(Ok(Json.toJson(Seq.empty[String]))))
     }
 
-    def load() = Action.async { implicit request =>
-        Ok(views.html.MsgBoard4Main())
+    def load = Action { implicit request =>
+        Ok(views.html.MsgBoard5Main())
     }
 
     implicit val userDataReads = Json.reads[UserData]
 
-    def validate = Action.async { implicit request =>
-        withJsonBody[UserData] { ud =>
-            (model.validateUser(ud.username, ud.password)).map { userExists =>
-                if (userExists)
-                    Ok(Json.toJson(true)).withSession("username" -> ud.username, "csrfToken" -> play.filters.csrf.CSRF.getToken.map(_.value).getOrElse(""))
-                else
-                    Ok(Json.toJson(false))
-            }
-        }
-    }
+    def validate = TODO 
+    // Action.async { implicit request =>
+    //     withJsonBody[UserData] { ud =>
+    //         (model.validateUser(ud.username, ud.password)).map { userExists =>
+    //             if (userExists)
+    //                 Ok(Json.toJson(true)).withSession("username" -> ud.username, "csrfToken" -> play.filters.csrf.CSRF.getToken.map(_.value).getOrElse(""))
+    //             else
+    //                 Ok(Json.toJson(false))
+    //         }
+    //     }
+    // }
 
-    def msgBoard = Action.async { implicit request =>
-        withSessionUsername { username =>
-            println(username + " " + model.getMessages(username))
-            Ok(Json.toJson(model.getMessages(username)))
-        }
-    } 
+    def msgBoard = TODO
+    // Action.async { implicit request =>
+    //     withSessionUsername { username =>
+    //         println(username + " " + model.getMessages(username))
+    //         Ok(Json.toJson(model.getMessages(username)))
+    //     }
+    // } 
 
-    def putMessage = Action.async { implicit request =>
-        withSessionUsername { username =>
-            withJsonBody[Message] { message =>
-                if (message.to.isDefined && message.to.nonEmpty)
-                    model.putMessage(username, message.content, message.to)
-                else
-                    model.putMessage(username, message.content)
-                Ok(Json.toJson(true))
-            }
-        }
-    }
+    def putMessage = TODO
+    // Action.async { implicit request =>
+    //     withSessionUsername { username =>
+    //         withJsonBody[Message] { message =>
+    //             if (message.to.isDefined && message.to.nonEmpty)
+    //                 model.putMessage(username, message.content, message.to)
+    //             else
+    //                 model.putMessage(username, message.content)
+    //             Ok(Json.toJson(true))
+    //         }
+    //     }
+    // }
 
-    def createUser = Action.async { implicit request =>
-        withJsonBody[UserData] { ud =>
-            if (model.createUser(ud.username, ud.password)) {
-                Ok(Json.toJson(true))
-                .withSession("username" -> ud.username, "csrfToken" -> play.filters.csrf.CSRF.getToken.map(_.value).getOrElse(""))
-            } else {
-                Ok(Json.toJson(false))
-            }
-        }
-    }
+    def createUser = TODO
+    // Action.async { implicit request =>
+    //     withJsonBody[UserData] { ud =>
+    //         if (model.createUser(ud.username, ud.password)) {
+    //             Ok(Json.toJson(true))
+    //             .withSession("username" -> ud.username, "csrfToken" -> play.filters.csrf.CSRF.getToken.map(_.value).getOrElse(""))
+    //         } else {
+    //             Ok(Json.toJson(false))
+    //         }
+    //     }
+    // }
 
 
     def logOut = Action {implicit request =>
