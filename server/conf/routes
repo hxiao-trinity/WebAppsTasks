@@ -14,8 +14,8 @@ GET         /logout                       controllers.MsgBoard1.logOut
 POST        /putMessage                 controllers.MsgBoard1.putMessage
 
 # TASK 7
-# GET         /WSGame                     controllers.WSGame.index
-# GET         /gameSocket                 controllers.WSGame.socket
+## GET         /WSGame                     controllers.WSGame.index
+## GET         /gameSocket                 controllers.WSGame.socket
 
 # TASK 8
 ## V2.0
@@ -38,12 +38,16 @@ GET         /logout3                    controllers.MsgBoard3.logOut
 GET         /load4                      controllers.MsgBoard4.load
 
 # TASK 9
-GET     /load5                          controllers.MsgBoard5.load
-# POST	/validate5						controllers.MsgBoard5.validate
-# POST	/create5						controllers.MsgBoard5.createUser
-# GET 	/MsgBoard5						controllers.MsgBoard5.msgBoard
-# POST	/putMessage5					controllers.MsgBoard5.putMessage
-# GET     /logout5						controllers.MsgBoard5.logout
+## GET     /load5                          controllers.MsgBoard5.load
+## POST	/validate5						controllers.MsgBoard5.validate
+## POST	/create5						controllers.MsgBoard5.createUser
+## GET 	/MsgBoard5						controllers.MsgBoard5.msgBoard
+## POST	/putMessage5					controllers.MsgBoard5.putMessage
+## GET     /logout5						controllers.MsgBoard5.logout
+
+# TASK 10 - 11
+GET             /sjs            controllers.ScalaJSGame.load10
+GET             /draw           controllers.ScalaJSGame.load11
 
 # Prefix must match `play.assets.urlPrefix`
 GET         /assets/*file                 controllers.Assets.at(file)

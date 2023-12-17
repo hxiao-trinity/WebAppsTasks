@@ -15,7 +15,7 @@ import slick.jdbc.PostgresProfile.api._
 import javax.inject._
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
-
+/*
 @Singleton
 class MsgBoard5 @Inject() (protected val dbConfigProvider: DatabaseConfigProvider, cc: ControllerComponents)
                           (implicit ec:ExecutionContext) 
@@ -95,4 +95,4 @@ class MsgBoard5 @Inject() (protected val dbConfigProvider: DatabaseConfigProvide
 
 }
 
-
+*/
