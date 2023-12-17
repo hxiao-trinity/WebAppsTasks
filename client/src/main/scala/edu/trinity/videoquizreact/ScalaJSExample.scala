@@ -111,15 +111,5 @@ import scala.scalajs.js
 import scala.scalajs.js.annotation.JSExportTopLevel
 
 object ScalaJSExample {
-/*
-  def main(args: Array[String]): Unit = {
-    println("Something else.")
-    
 
-    if (dom.document.getElementById("task10") != null) {
-      Task10
-    }
-   
-  }
-*/
 }

@@ -30,7 +30,7 @@ class Image(src: String) {
   def isReady: Boolean = ready
 }
 
-object Task10 {
+object ScalaJSGame {
 
   def main(args: Array[String]): Unit = {
     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
