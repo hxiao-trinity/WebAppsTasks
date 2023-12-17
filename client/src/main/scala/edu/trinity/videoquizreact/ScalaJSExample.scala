@@ -95,7 +95,7 @@ object ScalaJSExample {
 }
 */
 
-
+/*
 package edu.trinity.videoquizreact
 
 import _root_.edu.trinity.videoquizreact.edu.trinity.videoquizreact._
@@ -113,3 +113,5 @@ import scala.scalajs.js.annotation.JSExportTopLevel
 object ScalaJSExample {
 
 }
+
+*/
