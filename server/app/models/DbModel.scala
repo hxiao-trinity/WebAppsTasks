@@ -26,16 +26,23 @@ class DbModel(db:Database)(implicit ec:ExecutionContext){
     }
 
     def createUser(username:String, password:String) : Future[Boolean] = {
-        ???
+        db.run(Users += UsersRow(username, password)).map(addCount => addCount > 0)
     }
 
-    def putMessage(from: String, content: String, to:Option[String] = None): Future[Int] = {
-        ???
+    def putMessage(from: String, content: String, to:Option[String]): Any = {
+        db.run(Messages += MessagesRow((Math.random()*2147483647).toInt, from, Some(content), to, Some(java.sql.Timestamp.from(java.time.Instant.now()))))
     }
 
-    def getMessages(currentUsername:String) : Future[Seq[Message]] = {
-        ???
-    }
+    def getMessages(username:String) : Future[Seq[Message]] = ??? /*{
+        db.run(
+            (for {
+                    user <- Users if user.username === username
+                    message <- Messages if message.toUser === username || message.toUser === ""
+                 } yield {
+                    message
+            }).result
+        ).map(messages => messages.map(messages => Message(messages.content, messages.fromUser)))
+    }*/
 
 
     object Message {

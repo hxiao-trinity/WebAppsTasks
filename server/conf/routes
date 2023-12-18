@@ -38,7 +38,7 @@ GET         /logout3                    controllers.MsgBoard3.logOut
 GET         /load4                      controllers.MsgBoard4.load
 
 # TASK 9
-## GET     /load5                          controllers.MsgBoard5.load
+ GET     /load5                          controllers.MsgBoard5.load
 ## POST	/validate5						controllers.MsgBoard5.validate
 ## POST	/create5						controllers.MsgBoard5.createUser
 ## GET 	/MsgBoard5						controllers.MsgBoard5.msgBoard
