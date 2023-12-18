@@ -1,0 +1,19 @@
+@()(implicit request: RequestHeader, flash: Flash)
+
+@main("Drawing Page") {
+    <h1> My Paint.exe </h1>
+    <canvas id="canvas2" width="800" height="600" tabindex="1"></canvas>
+
+    <input type="color" id="colorPicker" value="#000000">
+    <input type="range" id="lineWidthSlider" min="1" max="10" value="5">
+    <span id="lineWidthValue">5</span> 
+
+
+    <button id="clearButton">Clear</button>
+    @*<button id="undoButton">Undo</button>*@
+
+
+
+    <input type="hidden" id="task11" value="">
+   
+}

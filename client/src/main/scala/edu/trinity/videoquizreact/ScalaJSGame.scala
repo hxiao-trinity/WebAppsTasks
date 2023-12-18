@@ -1,5 +1,6 @@
 package edu.trinity.videoquizreact
 
+import _root_.edu.trinity.videoquizreact.edu.trinity.videoquizreact.Drawing
 import org.scalajs.dom
 import org.scalajs.dom.ext.KeyCode
 import org.scalajs.dom.html.Canvas
@@ -31,12 +32,13 @@ class Image(src: String) {
 }
 
 object ScalaJSGame {
-
+/*
   def main(args: Array[String]): Unit = {
     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-    initGame
+    Drawing
+    //initGame
   }
-
+*/
   def isValidPosition(pos: Position, canvas: Canvas): Boolean = {
     0 <= pos.x && (pos.x + Hero.size) <= canvas.width && 0 <= pos.y && (pos.y + Hero.size) <= canvas.height
   }
@@ -160,15 +162,6 @@ object ScalaJSGame {
 
 
 }
-
-
-
-
-
-
-
-
-
 
 
 

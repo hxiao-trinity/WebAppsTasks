@@ -72,12 +72,11 @@ import scala.util.Random
       )
   }
 }
-
+*/
 
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
+/*
 
 object ScalaJSExample {
 
@@ -95,7 +94,7 @@ object ScalaJSExample {
 }
 */
 
-/*
+
 package edu.trinity.videoquizreact
 
 import _root_.edu.trinity.videoquizreact.edu.trinity.videoquizreact._
@@ -112,6 +111,13 @@ import scala.scalajs.js.annotation.JSExportTopLevel
 
 object ScalaJSExample {
 
+  if (dom.document.getElementById("task10") != null) {
+      print("1010101010101010101010101010101010101010")
+      ScalaJSGame
+  }
+  if (dom.document.getElementById("task11") != null) {
+      print("11111111111111111111111111111111111111111111111111111111")
+      Drawing
+  }
 }
 
-*/

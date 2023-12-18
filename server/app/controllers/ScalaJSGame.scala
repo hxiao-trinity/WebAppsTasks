@@ -19,7 +19,7 @@ class ScalaJSGame @Inject() (cc: ControllerComponents) extends AbstractControlle
     }
 
     def load11() = Action { implicit request =>
-        Ok(views.html.task11())
+        Ok(views.html.Drawing())
     }    
 
 }
